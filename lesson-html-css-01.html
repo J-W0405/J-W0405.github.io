@@ -123,7 +123,7 @@
   <div class="crumbs"><a href="index.html">devnotes</a> / <a href="course-html-css.html">HTML &amp; CSS Fundamentals</a> / Lesson 1</div>
   <span class="filetag">lesson 1 of 6</span>
   <h1>What Is HTML? Build Your First Web Page</h1>
-  <div class="meta">12 min · HTML &amp; CSS Fundamentals</div>
+  <div class="meta">18 min · HTML &amp; CSS Fundamentals</div>
 
   <p class="lede">Every single web page you've ever visited is built from HTML underneath. It's not "code" in the scary sense — it's more like labeling. You're just telling the browser "this is a heading," "this is a paragraph," "this is a button." By the end of this lesson you'll have written and opened your very first web page.</p>
 
@@ -172,15 +172,78 @@
       Indentation (the spacing before each tag) doesn't affect how the browser reads your page — it's purely for humans. But keep it consistent. Messy indentation makes it much harder to spot a missing closing tag later.
     </div>
 
+    <h2>Attributes: giving tags extra information</h2>
+    <p>Tags on their own only say what something is. <strong>Attributes</strong> add extra details inside the opening tag — things like where a link goes, which image to show, or a name you can reference later in CSS or JavaScript.</p>
+    <div class="code-block">&lt;<span class="tag">a</span> href="https://example.com"&gt;Visit site&lt;/<span class="tag">a</span>&gt;
+&lt;<span class="tag">img</span> src="cat.jpg" alt="A sleeping orange cat"&gt;
+&lt;<span class="tag">p</span> class="intro" id="opening-line"&gt;Welcome!&lt;/<span class="tag">p</span>&gt;</div>
+    <table>
+      <tr><th>Attribute</th><th>Used on</th><th>What it does</th></tr>
+      <tr><td><code>href</code></td><td><code>&lt;a&gt;</code></td><td>The URL the link goes to</td></tr>
+      <tr><td><code>src</code></td><td><code>&lt;img&gt;</code></td><td>The path or URL to the image file</td></tr>
+      <tr><td><code>alt</code></td><td><code>&lt;img&gt;</code></td><td>A text description — read by screen readers, and shown if the image fails to load</td></tr>
+      <tr><td><code>class</code></td><td>any tag</td><td>A label used to style multiple elements the same way with CSS</td></tr>
+      <tr><td><code>id</code></td><td>any tag</td><td>A unique label for one specific element</td></tr>
+    </table>
+    <div class="callout">
+      <div class="label">quick tip</div>
+      Never skip <code>alt</code> on images. It's not optional politeness — it's what makes your page usable for people using screen readers, and it's also what search engines read to understand what your image shows.
+    </div>
+
+    <h2>Semantic HTML: tags that describe meaning, not just boxes</h2>
+    <p>Early on, it's tempting to build everything out of generic <code>&lt;div&gt;</code> containers. Modern HTML gives you tags that describe what a section of the page actually <em>is</em> — this is called <strong>semantic HTML</strong>, and it matters more than it sounds like it should.</p>
+    <div class="code-block">&lt;<span class="tag">header</span>&gt;
+  &lt;<span class="tag">h1</span>&gt;My Site&lt;/<span class="tag">h1</span>&gt;
+  &lt;<span class="tag">nav</span>&gt;...&lt;/<span class="tag">nav</span>&gt;
+&lt;/<span class="tag">header</span>&gt;
+
+&lt;<span class="tag">main</span>&gt;
+  &lt;<span class="tag">section</span>&gt;
+    &lt;<span class="tag">article</span>&gt;
+      &lt;<span class="tag">h2</span>&gt;Blog post title&lt;/<span class="tag">h2</span>&gt;
+      &lt;<span class="tag">p</span>&gt;Post content...&lt;/<span class="tag">p</span>&gt;
+    &lt;/<span class="tag">article</span>&gt;
+  &lt;/<span class="tag">section</span>&gt;
+&lt;/<span class="tag">main</span>&gt;
+
+&lt;<span class="tag">footer</span>&gt;© 2026&lt;/<span class="tag">footer</span>&gt;</div>
+    <p>Why bother, if a <code>&lt;div&gt;</code> would look identical? Two real reasons: <strong>accessibility</strong> — screen readers use these tags to let someone jump straight to "navigation" or "main content" — and <strong>SEO</strong> — search engines use this same structure to understand what matters most on your page. Both of those directly affect whether real people can use and find your site.</p>
+
+    <h2>Comments: leaving notes in your code</h2>
+    <p>You can leave notes in your HTML that the browser completely ignores — useful for reminding yourself (or explaining to someone else) why a section exists.</p>
+    <div class="code-block"><span class="cmt">&lt;!-- This is a comment — the browser skips it entirely --&gt;</span>
+&lt;<span class="tag">p</span>&gt;This text shows up normally.&lt;/<span class="tag">p</span>&gt;</div>
+
+    <h2>Common mistakes beginners make (and how to spot them)</h2>
+    <ul>
+      <li><strong>Forgetting a closing tag.</strong> If your page's layout suddenly looks broken further down, check upward for a tag you opened but never closed.</li>
+      <li><strong>Mismatched nesting.</strong> Tags need to close in the reverse order they opened — <code>&lt;div&gt;&lt;p&gt;text&lt;/p&gt;&lt;/div&gt;</code> is correct; <code>&lt;div&gt;&lt;p&gt;text&lt;/div&gt;&lt;/p&gt;</code> is not.</li>
+      <li><strong>Using headings for size instead of meaning.</strong> Don't pick <code>&lt;h3&gt;</code> just because you want smaller text — that's a CSS job. Headings should reflect actual structure (h1 for the main title, h2 for major sections, and so on).</li>
+      <li><strong>Missing quotes around attribute values.</strong> <code>href=https://example.com</code> can break unexpectedly — always wrap attribute values in quotes.</li>
+    </ul>
+
+    <div class="ad-slot" style="margin:30px auto;"><div class="box">AD SLOT — 728×90 or responsive (mid-lesson)</div></div>
+
     <h2>Try it yourself</h2>
     <div class="callout exercise">
       <div class="label">exercise</div>
       Open a plain text editor (Notepad, TextEdit, or better — a free code editor like VS Code), paste the skeleton above, and save it as <code>index.html</code>. Then double-click the file — it should open in your browser showing "Hello, world!" as a heading. Try changing the text, adding a second paragraph, and adding a link with <code>&lt;a href="https://example.com"&gt;click here&lt;/a&gt;</code>.
     </div>
 
+    <h2>Level up: try the semantic version</h2>
+    <div class="callout exercise">
+      <div class="label">exercise 2</div>
+      Once the first exercise works, rebuild it using semantic tags instead of plain paragraphs: wrap your heading in a <code>&lt;header&gt;</code>, put your main text inside <code>&lt;main&gt;</code>, and add a <code>&lt;footer&gt;</code> with your name or the current year. This is genuinely how real sites are structured — you're not just practicing syntax, you're building the habit.
+    </div>
+
+    <div class="callout">
+      <div class="label">what's next</div>
+      Once you're comfortable with structure, the natural next step is making it interactive — that's what our <strong>JavaScript Basics</strong> course covers (adding logic and behavior on top of the HTML you already know how to build). It's part of the devnotes membership, alongside every remaining lesson in this course.
+    </div>
+
     <div class="callout">
       <div class="label">bottom line</div>
-      HTML's whole job is labeling content so the browser knows what each part is. Once that structure exists, CSS is what makes it actually look good — which is exactly what Lesson 2 covers.
+      HTML's whole job is labeling content — with the right tags, and increasingly, tags that describe actual meaning (semantic HTML), not just visual boxes. Once that structure exists, CSS is what makes it actually look good — which is exactly what Lesson 2 covers.
     </div>
   </article>
 </main>
