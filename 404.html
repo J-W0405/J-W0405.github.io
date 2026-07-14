@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Page not found — devnotes.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>404 — Page Not Found — devnotes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#151b23;--paper:#f4f2ec;--panel:#ffffff;--line:#d8d3c5;--amber:#e0932e;--mint:#3fa980;--muted:#6b6558;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;line-height:1.6;
+    min-height:100vh;display:flex;flex-direction:column;}
+  a{color:inherit;text-decoration:none;}
+  header{border-bottom:2px solid var(--ink);padding:16px 24px;}
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:18px;letter-spacing:-0.5px;}
+  .logo span{color:var(--amber);}
+  main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;}
+  .code{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:80px;color:var(--amber);line-height:1;}
+  .term{
+    background:var(--ink);color:#c9d1d9;font-family:'JetBrains Mono',monospace;font-size:14px;
+    padding:16px 20px;border-radius:8px;margin:20px 0 30px;text-align:left;max-width:420px;width:100%;
+  }
+  .term .prompt{color:var(--mint);}
+  h1{font-family:'JetBrains Mono',monospace;font-size:22px;margin-bottom:10px;}
+  p{font-size:15px;color:var(--muted);max-width:44ch;margin-bottom:26px;}
+  .btn{
+    font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;
+    padding:12px 22px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);
+  }
+  .btn:hover{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+  footer{border-top:2px solid var(--ink);padding:20px 24px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<header><div class="logo">dev<span>notes</span>._</div></header>
+
+<main>
+  <div class="code">404</div>
+  <div class="term">
+    <span class="prompt">$</span> cat requested_page.md<br>
+    cat: requested_page.md: No such file or directory
+  </div>
+  <h1>This page doesn't exist</h1>
+  <p>The lesson or article you're looking for may have moved, or the link might just be broken. Let's get you back on track.</p>
+  <a class="btn" href="index.html">← Back to devnotes</a>
+</main>
+
+<footer>© 2026 devnotes</footer>
+
+</body>
+</html>

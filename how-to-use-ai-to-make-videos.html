@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A beginner's guide to making videos with AI tools: script, visuals, voice, and editing, explained block by block.">
+<meta property="og:title" content="How to Use AI to Make Videos With Zero Editing Experience — devnotes">
+<meta property="og:description" content="A beginner's guide to making videos with AI tools: script, visuals, voice, and editing, explained block by block.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="og-image.png">
+<meta property="og:url" content="https://j-w0405.github.io/how-to-use-ai-to-make-videos.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>How to Use AI to Make Videos With Zero Editing Experience — devnotes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#151b23;--paper:#f4f2ec;--panel:#ffffff;--line:#d8d3c5;--amber:#e0932e;--mint:#3fa980;--muted:#6b6558;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;line-height:1.6;}
+  a{color:inherit;}
+  header{border-bottom:2px solid var(--ink);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;background:var(--paper);position:sticky;top:0;z-index:10;}
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:18px;letter-spacing:-0.5px;text-decoration:none;}
+  .logo span{color:var(--amber);}
+  .back{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);text-decoration:none;}
+  .back:hover{color:var(--ink);}
+  main{max-width:720px;margin:0 auto;padding:48px 24px 30px;}
+  .filetag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mint);background:#eaf5ef;display:inline-block;padding:2px 8px;border-radius:3px;margin-bottom:16px;}
+  h1{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:30px;line-height:1.2;letter-spacing:-0.5px;margin-bottom:14px;}
+  .meta{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:30px;border-bottom:1px dashed var(--line);padding-bottom:20px;}
+  .lede{font-size:17px;color:#3a352b;margin-bottom:28px;}
+  article h2{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;margin:36px 0 14px;padding-top:6px;border-top:1.5px solid var(--ink);}
+  article p{font-size:16px;margin-bottom:16px;color:#292520;}
+  article ul,article ol{margin:0 0 18px 22px;font-size:16px;color:#292520;}
+  article li{margin-bottom:8px;}
+  strong{color:var(--ink);}
+  table{width:100%;border-collapse:collapse;margin:20px 0 26px;font-size:14.5px;}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;}
+  th{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--panel);}
+  td{background:#fbfaf6;}
+  .callout{background:var(--panel);border:1.5px solid var(--line);border-left:4px solid var(--amber);padding:16px 18px;margin:22px 0;font-size:14.5px;}
+  .callout .label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+  .ad-slot{max-width:720px;margin:36px auto;padding:0 24px;}
+  .ad-slot .box{border:1.5px dashed var(--line);background:#ece8dc;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;text-align:center;padding:18px;}
+  footer{margin-top:60px;border-top:2px solid var(--ink);padding:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">dev<span>notes</span>._</a>
+  <a class="back" href="index.html">&larr; back</a>
+</header>
+
+<main>
+  <span class="filetag">#ai #video</span>
+  <h1>How to Use AI to Make Videos With Zero Editing Experience</h1>
+  <div class="meta">9 min read · devnotes</div>
+
+  <p class="lede">Three years ago, making a decent video meant knowing Premiere or Final Cut. Today you can write a script as plain text and get back scenes, voiceover, subtitles, and even transitions. You don't need to be an editor — you need to know which tool to use at each step. That's exactly what we cover here.</p>
+
+  <article>
+    <h2>Understand the process before picking tools</h2>
+    <p>Making a video with AI help isn't "one tool that does everything." It's built block by block, and each block has one or two tools that do that job well. The blocks are: script, visuals/clips, voice, music, and final edit. Trying to solve everything with a single app usually gives generic results — mixing specialized tools gives better output without costing more time.</p>
+
+    <h2>The tools, block by block</h2>
+    <table>
+      <tr><th>Block</th><th>What it's for</th><th>Recommended level</th></tr>
+      <tr><td>Script &amp; ideas</td><td>Structuring the video before shooting or generating anything</td><td>Any text AI assistant (Claude, for example)</td></tr>
+      <tr><td>Video generation</td><td>Creating clips from a text description</td><td>Beginner-focused tools are easier to learn than mid-tier ones</td></tr>
+      <tr><td>Avatars / on-camera voice</td><td>A virtual presenter that reads your script</td><td>Platforms specialized in realistic avatars, great if you don't want to film yourself</td></tr>
+      <tr><td>Editing &amp; subtitles</td><td>Cutting, joining clips, and adding automatic captions</td><td>Browser-based editors, nothing to install, built for beginners</td></tr>
+    </table>
+
+    <div class="callout">
+      <div class="label">tip to get started</div>
+      Don't test five tools at once. Pick one per block, make one short video start to finish, and only then decide if you need to swap anything. Most beginners lose more time testing tools than actually editing.
+    </div>
+
+    <h2>A simple workflow for your first video</h2>
+    <ol>
+      <li><strong>Write the script first, without any video AI yet.</strong> Outline in 5-10 lines what you'll say and in what order. Ask a text assistant to help structure it if you don't know where to start.</li>
+      <li><strong>Generate or film the scenes.</strong> If you don't want to be on camera, an AI avatar can narrate your script. If you prefer generated clips, describe each scene with the same level of detail you'd give a camera operator.</li>
+      <li><strong>Add automatic subtitles.</strong> Most social media video is watched with sound off — a video without captions loses a big chunk of its audience.</li>
+      <li><strong>Review the pacing, not just the content.</strong> An AI video with no cuts or pauses feels artificial. Trim silences and filler before publishing.</li>
+    </ol>
+
+    <h2>Common mistakes when starting out</h2>
+    <ul>
+      <li><strong>Giving vague descriptions.</strong> "A video about technology" gives generic results. The more specific the scene description, the better the output.</li>
+      <li><strong>Not reviewing the video before publishing.</strong> AI tools still make visual or sync mistakes — always watch the full result before uploading.</li>
+      <li><strong>Relying 100% on templates.</strong> Templates save time, but a video that looks like a thousand others won't stand out. Change colors, pacing, or structure to make it yours.</li>
+    </ul>
+
+    <div class="callout">
+      <div class="label">bottom line</div>
+      You don't need professional editing skills to publish your first video: you need a clear script, one tool per block of the process, and the discipline to review before publishing. Quality comes from repetition, not the most expensive tool.
+    </div>
+  </article>
+</main>
+
+<div class="ad-slot"><div class="box">AD SLOT — 300×250 or responsive (in-article)</div></div>
+
+<footer>
+  <span>© 2026 devnotes — made with coffee and console.log()</span>
+  <span><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-of-service.html">Terms</a> · <a href="https://ko-fi.com/jw0405" target="_blank" rel="noopener">☕ Support us</a> · <a href="index.html">back to home</a></span>
+</footer>
+
+
+<div id="dn-cookie-banner" role="dialog" aria-label="Cookie consent" style="display:none;position:fixed;left:16px;right:16px;bottom:16px;max-width:560px;margin:0 auto;background:#151b23;color:#f4f2ec;border-radius:8px;padding:16px 18px;font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:9999;">
+  <p style="margin:0 0 10px;">This site uses cookies to understand usage and show relevant ads. <a href="privacy-policy.html" style="color:#3fa980;">Learn more</a></p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+    <button onclick="dnCookieChoice('accept')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:none;cursor:pointer;background:#3fa980;color:#151b23;">Accept all</button>
+    <button onclick="dnCookieChoice('reject')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:1px solid #555;cursor:pointer;background:transparent;color:#f4f2ec;">Reject non-essential</button>
+  </div>
+</div>
+<script>
+  function dnCookieChoice(choice){
+    try{ localStorage.setItem('devnotes-cookie-consent', choice); }catch(e){}
+    var b = document.getElementById('dn-cookie-banner');
+    if(b) b.style.display = 'none';
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    try{
+      if(!localStorage.getItem('devnotes-cookie-consent')){
+        var b = document.getElementById('dn-cookie-banner');
+        if(b) b.style.display = 'block';
+      }
+    }catch(e){}
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Learn how to use AI to build your first Roblox game, from Studio setup to AI-generated scripts and 3D assets.">
+<meta property="og:title" content="How to Use AI to Build Your First Roblox Game — devnotes">
+<meta property="og:description" content="Learn how to use AI to build your first Roblox game, from Studio setup to AI-generated scripts and 3D assets.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="og-image.png">
+<meta property="og:url" content="https://j-w0405.github.io/how-to-use-ai-to-make-a-roblox-game.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>How to Use AI to Build Your First Roblox Game — devnotes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#151b23;--paper:#f4f2ec;--panel:#ffffff;--line:#d8d3c5;--amber:#e0932e;--mint:#3fa980;--muted:#6b6558;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;line-height:1.6;}
+  a{color:inherit;}
+  header{border-bottom:2px solid var(--ink);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;background:var(--paper);position:sticky;top:0;z-index:10;}
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:18px;letter-spacing:-0.5px;text-decoration:none;}
+  .logo span{color:var(--amber);}
+  .back{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);text-decoration:none;}
+  .back:hover{color:var(--ink);}
+  main{max-width:720px;margin:0 auto;padding:48px 24px 30px;}
+  .filetag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mint);background:#eaf5ef;display:inline-block;padding:2px 8px;border-radius:3px;margin-bottom:16px;}
+  h1{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:30px;line-height:1.2;letter-spacing:-0.5px;margin-bottom:14px;}
+  .meta{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:30px;border-bottom:1px dashed var(--line);padding-bottom:20px;}
+  .lede{font-size:17px;color:#3a352b;margin-bottom:28px;}
+  article h2{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;margin:36px 0 14px;padding-top:6px;border-top:1.5px solid var(--ink);}
+  article p{font-size:16px;margin-bottom:16px;color:#292520;}
+  article ul,article ol{margin:0 0 18px 22px;font-size:16px;color:#292520;}
+  article li{margin-bottom:8px;}
+  strong{color:var(--ink);}
+  .callout{background:var(--panel);border:1.5px solid var(--line);border-left:4px solid var(--amber);padding:16px 18px;margin:22px 0;font-size:14.5px;}
+  .callout .label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+  .steps{counter-reset:step;margin:24px 0;}
+  .step{display:grid;grid-template-columns:40px 1fr;gap:14px;margin-bottom:18px;}
+  .step .n{counter-increment:step;font-family:'JetBrains Mono',monospace;font-weight:800;font-size:15px;background:var(--ink);color:var(--paper);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+  .step .n::before{content:counter(step);}
+  .step h3{font-size:15.5px;margin-bottom:4px;}
+  .step p{font-size:15px;color:#3a352b;margin-bottom:0;}
+  .ad-slot{max-width:720px;margin:36px auto;padding:0 24px;}
+  .ad-slot .box{border:1.5px dashed var(--line);background:#ece8dc;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;text-align:center;padding:18px;}
+  footer{margin-top:60px;border-top:2px solid var(--ink);padding:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">dev<span>notes</span>._</a>
+  <a class="back" href="index.html">&larr; back</a>
+</header>
+
+<main>
+  <span class="filetag">#ai #gamedev</span>
+  <h1>How to Use AI to Build Your First Roblox Game</h1>
+  <div class="meta">10 min read · devnotes</div>
+
+  <p class="lede">"Making a game" used to mean years of learning to program. Roblox flipped that, and AI is speeding it up even more: today you can describe what you want to build in plain text and get scripts, 3D models, and textures as a starting point. But heads up — AI speeds up the process, it doesn't replace it entirely. Here's how to use it well.</p>
+
+  <article>
+    <h2>What AI can do for you (and what it can't)</h2>
+    <p>In 2026, the most effective way to use AI in Roblox development is as an accelerator, not a replacement for the developer. AI can generate Luau scripts (Roblox's programming language) from a plain-language description, brainstorm game mechanics, create textures and 3D models, and write character dialogue. What still depends on you: the overall game architecture, testing it with real players, and the creative decisions that give your project personality.</p>
+
+    <div class="callout">
+      <div class="label">important</div>
+      You don't need to know how to program to get started, but you will need to learn to read the basic code AI generates for you — even just to know whether it works. Treating the code as a "black box" you never look at is the fastest way to get stuck when something breaks.
+    </div>
+
+    <h2>Step by step for your first game</h2>
+    <div class="steps">
+      <div class="step"><div class="n"></div><div><h3>Install Roblox Studio</h3><p>It's free and the only official tool for building on the platform. Download it from the Roblox Create site.</p></div></div>
+      <div class="step"><div class="n"></div><div><h3>Pick a simple template, not an open world</h3><p>Roblox Studio ships with ready-made templates: an "Obby" (obstacle course) is the most recommended option for your first project — easy to set up and still one of the most popular genres.</p></div></div>
+      <div class="step"><div class="n"></div><div><h3>Use AI to generate your first script</h3><p>Studio's built-in AI assistant can generate code from a description, like "create a door that opens when the player gets close." It's a good starting point for understanding how code is structured, even if you need to tweak it.</p></div></div>
+      <div class="step"><div class="n"></div><div><h3>Generate 3D assets instead of modeling from scratch</h3><p>If you don't know Blender, there are AI tools that turn a text description or a reference image into a ready-to-import 3D model — saving you weeks compared to learning modeling from zero.</p></div></div>
+      <div class="step"><div class="n"></div><div><h3>Playtest it yourself, over and over</h3><p>No AI can tell you if your game is actually fun. Play your own creation repeatedly and adjust difficulty, pacing, and controls before publishing.</p></div></div>
+      <div class="step"><div class="n"></div><div><h3>Publish and watch how people play</h3><p>From Studio, go to File → Publish to Roblox. Give it a clear name and an eye-catching thumbnail — that's the first thing that decides whether someone clicks in to try your game.</p></div></div>
+    </div>
+
+    <h2>A mistake that stalls a lot of beginners</h2>
+    <p>Thinking AI will build the whole game for you. AI is great for speeding up specific tasks — a script, a texture, an idea — but the judgment of what makes your game fun, how its systems connect, and when something doesn't feel right, is still your job. The developers publishing games faster in 2026 are the ones who learned to combine AI with their own judgment, not the ones waiting for AI to think for them.</p>
+
+    <div class="callout">
+      <div class="label">bottom line</div>
+      Start with a simple template, use AI to speed up scripts and assets, but playtest and tweak your own game constantly. AI saves you the slowest technical parts — the game design is still yours.
+    </div>
+  </article>
+</main>
+
+<div class="ad-slot"><div class="box">AD SLOT — 300×250 or responsive (in-article)</div></div>
+
+<footer>
+  <span>© 2026 devnotes — made with coffee and console.log()</span>
+  <span><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-of-service.html">Terms</a> · <a href="https://ko-fi.com/jw0405" target="_blank" rel="noopener">☕ Support us</a> · <a href="index.html">back to home</a></span>
+</footer>
+
+
+<div id="dn-cookie-banner" role="dialog" aria-label="Cookie consent" style="display:none;position:fixed;left:16px;right:16px;bottom:16px;max-width:560px;margin:0 auto;background:#151b23;color:#f4f2ec;border-radius:8px;padding:16px 18px;font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:9999;">
+  <p style="margin:0 0 10px;">This site uses cookies to understand usage and show relevant ads. <a href="privacy-policy.html" style="color:#3fa980;">Learn more</a></p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+    <button onclick="dnCookieChoice('accept')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:none;cursor:pointer;background:#3fa980;color:#151b23;">Accept all</button>
+    <button onclick="dnCookieChoice('reject')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:1px solid #555;cursor:pointer;background:transparent;color:#f4f2ec;">Reject non-essential</button>
+  </div>
+</div>
+<script>
+  function dnCookieChoice(choice){
+    try{ localStorage.setItem('devnotes-cookie-consent', choice); }catch(e){}
+    var b = document.getElementById('dn-cookie-banner');
+    if(b) b.style.display = 'none';
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    try{
+      if(!localStorage.getItem('devnotes-cookie-consent')){
+        var b = document.getElementById('dn-cookie-banner');
+        if(b) b.style.display = 'block';
+      }
+    }catch(e){}
+  });
+</script>
+
+</body>
+</html>

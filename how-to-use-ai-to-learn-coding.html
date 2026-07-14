@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Learn how to use AI tools like Claude to learn coding faster, without just copy-pasting code you don't understand.">
+<meta property="og:title" content="How to Use AI to Learn Coding Faster — devnotes">
+<meta property="og:description" content="Learn how to use AI tools like Claude to learn coding faster, without just copy-pasting code you don't understand.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="og-image.png">
+<meta property="og:url" content="https://j-w0405.github.io/how-to-use-ai-to-learn-coding.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>How to Use AI to Learn Coding Faster — devnotes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#151b23;--paper:#f4f2ec;--panel:#ffffff;--line:#d8d3c5;--amber:#e0932e;--mint:#3fa980;--muted:#6b6558;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;line-height:1.6;}
+  a{color:inherit;}
+  header{border-bottom:2px solid var(--ink);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;background:var(--paper);position:sticky;top:0;z-index:10;}
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:18px;letter-spacing:-0.5px;text-decoration:none;}
+  .logo span{color:var(--amber);}
+  .back{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);text-decoration:none;}
+  .back:hover{color:var(--ink);}
+  main{max-width:720px;margin:0 auto;padding:48px 24px 30px;}
+  .filetag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mint);background:#eaf5ef;display:inline-block;padding:2px 8px;border-radius:3px;margin-bottom:16px;}
+  h1{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:32px;line-height:1.2;letter-spacing:-0.5px;margin-bottom:14px;}
+  .meta{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:30px;border-bottom:1px dashed var(--line);padding-bottom:20px;}
+  .lede{font-size:17px;color:#3a352b;margin-bottom:28px;}
+  article h2{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;margin:36px 0 14px;padding-top:6px;border-top:1.5px solid var(--ink);}
+  article p{font-size:16px;margin-bottom:16px;color:#292520;}
+  article ul,article ol{margin:0 0 18px 22px;font-size:16px;color:#292520;}
+  article li{margin-bottom:8px;}
+  strong{color:var(--ink);}
+  .callout{background:var(--panel);border:1.5px solid var(--line);border-left:4px solid var(--amber);padding:16px 18px;margin:22px 0;font-size:14.5px;}
+  .callout .label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+  .prompt-example{background:var(--ink);color:#c9d1d9;font-family:'JetBrains Mono',monospace;font-size:13.5px;padding:16px 18px;border-radius:6px;margin:18px 0;white-space:pre-wrap;line-height:1.6;}
+  .prompt-example .p{color:var(--mint);}
+  .ad-slot{max-width:720px;margin:36px auto;padding:0 24px;}
+  .ad-slot .box{border:1.5px dashed var(--line);background:#ece8dc;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;text-align:center;padding:18px;}
+  footer{margin-top:60px;border-top:2px solid var(--ink);padding:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">dev<span>notes</span>._</a>
+  <a class="back" href="index.html">&larr; back</a>
+</header>
+
+<main>
+  <span class="filetag">#ai #productivity</span>
+  <h1>How to Use AI (Like Claude) to Learn Coding Faster</h1>
+  <div class="meta">8 min read · devnotes</div>
+
+  <p class="lede">AI won't turn you into a programmer overnight — but used well, it can cut months off the confusion. The trick isn't asking it to "just do the code for you." It's using it as a patient tutor who never gets tired of your questions. Here's how to do that right.</p>
+
+  <article>
+    <h2>The most common mistake: copy-pasting without understanding</h2>
+    <p>When someone starts coding with AI help, the temptation is to ask for the full code, paste it in, and move on. The problem is you don't actually learn anything that way — you just end up with a file that works until something breaks, and at that point you won't even know where to start fixing it.</p>
+    <p>The difference between using AI to <strong>learn</strong> and using it to <strong>do the task for you</strong> comes down to how you ask. "Build me a login form in React" gets you code. Asking it to walk you through each part, and check that you understood before moving on, gets you real learning.</p>
+
+    <div class="callout">
+      <div class="label">quick tip</div>
+      Before pasting any AI-generated code into your project, ask: "explain what each line does as if I'd never seen this language before." If you don't understand the explanation, ask for a simpler example before moving on.
+    </div>
+
+    <h2>Five practical ways to use AI as a tutor</h2>
+    <ul>
+      <li><strong>Ask for explanations, not just solutions.</strong> Instead of "fix this bug," try "explain why this code throws this error, but don't fix it yet — I want to try fixing it myself first."</li>
+      <li><strong>Use AI to generate exercises at your level.</strong> Ask for 3 small exercises on a concept you just learned (loops in JavaScript, for example), then have it review your attempts.</li>
+      <li><strong>Ask for real-world analogies.</strong> Abstract concepts like "asynchronicity" or "recursion" click much faster with an everyday comparison than with the textbook definition.</li>
+      <li><strong>Simulate a coding interview.</strong> Ask it to quiz you on a topic like a junior technical interview, and give you honest feedback on your answers.</li>
+      <li><strong>Get your own code reviewed.</strong> This is more valuable than asking for new code: write something first, even if it's wrong, and ask for a review with improvement suggestions.</li>
+    </ul>
+
+    <h2>A prompt that actually works</h2>
+    <p>How you phrase a request completely changes the quality of what you get back. Compare these two approaches:</p>
+    <div class="prompt-example"><span class="p">✕ weak prompt:</span>
+"write me a function that validates an email"
+
+<span class="p">✓ prompt that teaches:</span>
+"I'm learning JavaScript. I want to write an email validation
+function myself. Before giving me code, explain what I need to
+know about regular expressions to do this, with a simple example
+different from the one I'll build. Then tell me if my attempt is
+correct once I show it to you."</div>
+    <p>The second prompt turns AI into a tutor instead of a copy-paste machine. It takes a little longer to type, but the result is knowledge that actually sticks.</p>
+
+    <h2>Build real projects, not just isolated exercises</h2>
+    <p>Small exercises teach syntax, but full projects teach you to think like a developer: how to organize files, how to break a big problem into small pieces, and how to debug when something isn't working and you don't know why. Use AI as a companion throughout the whole project, not just at the start — ask it to help plan the structure before writing a single line, and consult it when you get stuck, not after you've already lost an hour frustrated.</p>
+
+    <h2>What AI shouldn't replace</h2>
+    <p>As useful as it is, there are two things no AI does for you: repeated practice (writing code with your own hands, many times) and the time it takes to sit and think through a problem before asking for help. If you ask AI the second you're stuck, you never build the frustration tolerance every programmer needs. A good rule: try it yourself for 10-15 minutes before asking.</p>
+
+    <div class="callout">
+      <div class="label">bottom line</div>
+      Use AI to explain, question, and review — not to think for you. The goal isn't code that works today. It's understanding enough to write it yourself tomorrow.
+    </div>
+  </article>
+</main>
+
+<div class="ad-slot"><div class="box">AD SLOT — 300×250 or responsive (in-article)</div></div>
+
+<footer>
+  <span>© 2026 devnotes — made with coffee and console.log()</span>
+  <span><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-of-service.html">Terms</a> · <a href="https://ko-fi.com/jw0405" target="_blank" rel="noopener">☕ Support us</a> · <a href="index.html">back to home</a></span>
+</footer>
+
+
+<div id="dn-cookie-banner" role="dialog" aria-label="Cookie consent" style="display:none;position:fixed;left:16px;right:16px;bottom:16px;max-width:560px;margin:0 auto;background:#151b23;color:#f4f2ec;border-radius:8px;padding:16px 18px;font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:9999;">
+  <p style="margin:0 0 10px;">This site uses cookies to understand usage and show relevant ads. <a href="privacy-policy.html" style="color:#3fa980;">Learn more</a></p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+    <button onclick="dnCookieChoice('accept')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:none;cursor:pointer;background:#3fa980;color:#151b23;">Accept all</button>
+    <button onclick="dnCookieChoice('reject')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:1px solid #555;cursor:pointer;background:transparent;color:#f4f2ec;">Reject non-essential</button>
+  </div>
+</div>
+<script>
+  function dnCookieChoice(choice){
+    try{ localStorage.setItem('devnotes-cookie-consent', choice); }catch(e){}
+    var b = document.getElementById('dn-cookie-banner');
+    if(b) b.style.display = 'none';
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    try{
+      if(!localStorage.getItem('devnotes-cookie-consent')){
+        var b = document.getElementById('dn-cookie-banner');
+        if(b) b.style.display = 'block';
+      }
+    }catch(e){}
+  });
+</script>
+
+</body>
+</html>
