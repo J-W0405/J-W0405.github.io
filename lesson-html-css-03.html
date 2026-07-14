@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7954849947139093" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Lesson 3: The Box Model, finally explained — content, padding, border, margin, and box-sizing. Premium lesson for devnotes members.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>Lesson 3: The Box Model — devnotes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  function dnGetProgress(){
+    try{ return JSON.parse(localStorage.getItem('devnotes-progress') || '{}'); }
+    catch(e){ return {}; }
+  }
+  function dnSaveProgress(p){
+    try{ localStorage.setItem('devnotes-progress', JSON.stringify(p)); }catch(e){}
+  }
+  function dnIsComplete(course, lessonId){
+    const p = dnGetProgress();
+    return !!(p[course] && p[course][lessonId]);
+  }
+  function dnToggleComplete(course, lessonId){
+    const p = dnGetProgress();
+    if(!p[course]) p[course] = {};
+    p[course][lessonId] = !p[course][lessonId];
+    dnSaveProgress(p);
+    return p[course][lessonId];
+  }
+</script>
+<style>
+  :root{--ink:#151b23;--paper:#f4f2ec;--panel:#ffffff;--line:#d8d3c5;--amber:#e0932e;--mint:#3fa980;--muted:#6b6558;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;line-height:1.6;}
+  a{color:inherit;}
+  header{border-bottom:2px solid var(--ink);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;background:var(--paper);position:sticky;top:0;z-index:10;}
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:18px;letter-spacing:-0.5px;text-decoration:none;}
+  .logo span{color:var(--amber);}
+  .back{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);text-decoration:none;}
+  .back:hover{color:var(--ink);}
+
+  .member-bar{background:var(--ink);color:#c9d1d9;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;}
+  .member-bar span{color:var(--mint);}
+
+  .complete-bar{max-width:720px;margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
+  .complete-btn{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;padding:10px 18px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;border-radius:4px;}
+  .complete-btn.done{background:var(--mint);border-color:var(--mint);color:var(--ink);}
+
+  main{max-width:720px;margin:0 auto;padding:16px 24px 30px;}
+  .crumbs{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:18px;}
+  .crumbs a{color:var(--mint);}
+  .filetag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mint);background:#eaf5ef;display:inline-block;padding:2px 8px;border-radius:3px;margin-bottom:16px;}
+  h1{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:30px;line-height:1.2;letter-spacing:-0.5px;margin-bottom:14px;}
+  .meta{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:30px;border-bottom:1px dashed var(--line);padding-bottom:20px;}
+  .lede{font-size:17px;color:#3a352b;margin-bottom:28px;}
+
+  article h2{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;margin:36px 0 14px;padding-top:6px;border-top:1.5px solid var(--ink);}
+  article p{font-size:16px;margin-bottom:16px;color:#292520;}
+  article ul,article ol{margin:0 0 18px 22px;font-size:16px;color:#292520;}
+  article li{margin-bottom:8px;}
+  strong{color:var(--ink);}
+  code{font-family:'JetBrains Mono',monospace;background:#eae6d8;padding:2px 6px;border-radius:3px;font-size:14px;}
+
+  .code-block{background:var(--ink);color:#c9d1d9;font-family:'JetBrains Mono',monospace;font-size:13.5px;padding:18px 20px;border-radius:6px;margin:18px 0;white-space:pre;overflow-x:auto;line-height:1.6;}
+  .code-block .cmt{color:#6b7280;}
+
+  .box-diagram{margin:24px 0;display:flex;justify-content:center;}
+  .bd-margin{background:#fbeedb;padding:24px;border-radius:6px;position:relative;}
+  .bd-margin::before{content:"margin";position:absolute;top:4px;left:10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--amber);}
+  .bd-border{background:#151b23;padding:14px;border-radius:4px;position:relative;}
+  .bd-border::before{content:"border";position:absolute;top:-8px;left:10px;background:#151b23;padding:0 4px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#c9d1d9;}
+  .bd-padding{background:#eaf5ef;padding:22px;border-radius:3px;position:relative;}
+  .bd-padding::before{content:"padding";position:absolute;top:4px;left:10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mint);}
+  .bd-content{background:#ffffff;border:1.5px solid var(--line);padding:18px 30px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink);text-align:center;margin-top:14px;}
+
+  table{width:100%;border-collapse:collapse;margin:20px 0 26px;font-size:14.5px;}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;}
+  th{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--panel);}
+  td{background:#fbfaf6;}
+  td code{background:transparent;padding:0;}
+
+  .callout{background:var(--panel);border:1.5px solid var(--line);border-left:4px solid var(--amber);padding:16px 18px;margin:22px 0;font-size:14.5px;}
+  .callout .label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+  .callout.exercise{border-left-color:var(--mint);}
+  .callout.exercise .label{color:var(--mint);}
+
+  .ad-slot{max-width:720px;margin:36px auto;padding:0 24px;}
+  .ad-slot .box{border:1.5px dashed var(--line);background:#ece8dc;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;text-align:center;padding:18px;}
+
+  .next-nav{max-width:720px;margin:40px auto 0;padding:20px 24px;border:1.5px solid var(--line);background:var(--panel);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+  .next-nav span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);}
+  .next-nav strong{display:block;font-size:15px;margin-top:2px;}
+
+  footer{margin-top:50px;border-top:2px solid var(--ink);padding:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+</style>
+</head>
+<body>
+
+<div class="member-bar">🔒 <span>Members-only lesson</span> — thanks for supporting devnotes</div>
+
+<header>
+  <a class="logo" href="index.html">dev<span>notes</span>._</a>
+  <a class="back" href="course-html-css.html">&larr; back to course</a>
+</header>
+
+<div class="complete-bar">
+  <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);">progress is saved in this browser — no account needed</span>
+  <button class="complete-btn" id="complete-btn" onclick="markComplete()">Mark lesson as complete</button>
+</div>
+
+<main>
+  <div class="crumbs"><a href="index.html">devnotes</a> / <a href="course-html-css.html">HTML &amp; CSS Fundamentals</a> / Lesson 3</div>
+  <span class="filetag">lesson 3 of 6 · premium</span>
+  <h1>The Box Model, Finally Explained</h1>
+  <div class="meta">20 min · HTML &amp; CSS Fundamentals</div>
+
+  <p class="lede">Almost every "why is my layout doing this" moment traces back to one thing: not understanding the box model. Every single element on a page is a rectangular box, and this lesson is about exactly how big that box really is — which is rarely just what you typed.</p>
+
+  <article>
+    <h2>Every element is four boxes, nested</h2>
+    <p>From the inside out, every element is made of four layers:</p>
+
+    <div class="box-diagram">
+      <div class="bd-margin">
+        <div class="bd-border">
+          <div class="bd-padding">
+            <div class="bd-content">content</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul>
+      <li><strong>Content</strong> — the actual text or media inside</li>
+      <li><strong>Padding</strong> — space between the content and the border</li>
+      <li><strong>Border</strong> — a line (or nothing) wrapping the padding</li>
+      <li><strong>Margin</strong> — space outside the border, pushing other elements away</li>
+    </ul>
+    <p>You already used padding and margin in Lesson 2 — this lesson is about the part that trips people up: how they all combine to determine an element's real, final size.</p>
+
+    <h2>The math that surprises everyone</h2>
+    <p>Say you set this:</p>
+    <div class="code-block">.box {
+  width: 200px;
+  padding: 20px;
+  border: 5px solid black;
+}</div>
+    <p>You might expect the box to be 200px wide. By default, it isn't. The browser adds padding and border <em>on top of</em> your width:</p>
+    <div class="code-block">200px (width)
++ 20px + 20px (padding, left and right)
++ 5px + 5px (border, left and right)
+= <strong>250px</strong> total rendered width</div>
+    <p>This is the single most common source of "my layout is 50px wider than I expected" bugs — and it has a one-line fix.</p>
+
+    <h2>box-sizing: the fix everyone should use</h2>
+    <div class="code-block">* {
+  box-sizing: border-box;
+}</div>
+    <p>This one line changes the rule: <code>width</code> now includes padding and border inside the number you set, instead of adding to it. With <code>border-box</code>, a <code>width: 200px</code> box stays exactly 200px, no matter how much padding or border you add — the content area just shrinks to make room.</p>
+
+    <div class="callout">
+      <div class="label">quick tip</div>
+      Adding <code>* { box-sizing: border-box; }</code> at the very top of your stylesheet is standard practice on almost every real project. It makes sizing predictable, and there's essentially no downside — most developers add it by habit on day one of every new project.
+    </div>
+
+    <h2>Margin vs. padding: when to use which</h2>
+    <table>
+      <tr><th></th><th>Padding</th><th>Margin</th></tr>
+      <tr><td>Location</td><td>Inside the border</td><td>Outside the border</td></tr>
+      <tr><td>Affected by background color?</td><td>Yes — background extends into padding</td><td>No — margin is always transparent</td></tr>
+      <tr><td>Use it for</td><td>Breathing room around content inside a box</td><td>Space between separate elements</td></tr>
+    </table>
+
+    <div class="ad-slot" style="margin:30px auto;"><div class="box">AD SLOT — 728×90 or responsive (mid-lesson)</div></div>
+
+    <h2>Margin collapsing: a quirk worth knowing</h2>
+    <p>When two elements stack vertically and both have margin, CSS doesn't always add the two margins together. If element A has <code>margin-bottom: 20px</code> and element B right below it has <code>margin-top: 30px</code>, the gap between them is <strong>30px</strong> (the larger one), not 50px. This only happens with vertical margins between normal block elements — it's a common source of "why isn't my spacing what I calculated" confusion.</p>
+
+    <h2>Constraining size: max-width and min-width</h2>
+    <div class="code-block">.container {
+  width: 100%;
+  max-width: 800px; <span class="cmt">/* never grows past 800px, even on huge screens */</span>
+  margin: 0 auto;   <span class="cmt">/* centers it horizontally */</span>
+}</div>
+    <p><code>max-width</code> combined with <code>width: 100%</code> is the standard pattern for a page that's responsive (shrinks on small screens) but doesn't stretch uncomfortably wide on a large monitor. <code>margin: 0 auto</code> is the classic trick for centering a block element horizontally once it has a defined width.</p>
+
+    <h2>Try it yourself</h2>
+    <div class="callout exercise">
+      <div class="label">exercise</div>
+      Take the <code>.card</code> from Lesson 2 and add <code>width: 300px</code> to it. Open your browser's dev tools (right-click → Inspect), click on the card element, and look for the box model diagram in the Styles panel — it shows you the exact content/padding/border/margin values live. Then add <code>box-sizing: border-box</code> and watch the numbers change.
+    </div>
+
+    <h2>Level up: build a centered, constrained layout</h2>
+    <div class="callout exercise">
+      <div class="label">exercise 2</div>
+      Wrap your whole page's content in a <code>&lt;div class="container"&gt;</code>, and give it <code>max-width: 700px</code>, <code>width: 100%</code>, and <code>margin: 0 auto</code>. Resize your browser window and watch it stay centered and readable at every width — this is the exact pattern real websites use for their main content column.
+    </div>
+
+    <div class="callout">
+      <div class="label">what's next</div>
+      Once sizing and spacing feel predictable, Lesson 4 covers Flexbox — how to actually arrange multiple boxes next to each other, align them, and distribute space between them without guesswork.
+    </div>
+
+    <div class="callout">
+      <div class="label">bottom line</div>
+      Every element is content, padding, border, and margin, nested in that order. Add <code>box-sizing: border-box</code> to everything, and your <code>width</code> values will finally mean what you think they mean.
+    </div>
+  </article>
+</main>
+
+<div class="ad-slot"><div class="box">AD SLOT — 300×250 or responsive (in-lesson)</div></div>
+
+<div class="next-nav">
+  <div><span>next up</span><strong>Lesson 4: Flexbox — coming soon</strong></div>
+  <a href="course-html-css.html" class="back">view all lessons →</a>
+</div>
+
+<footer>
+  <span>© 2026 devnotes — made with coffee and console.log()</span>
+  <span><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-of-service.html">Terms</a> · <a href="https://ko-fi.com/jw0405" target="_blank" rel="noopener">☕ Support us</a> · <a href="index.html">back to home</a></span>
+</footer>
+
+<div id="dn-cookie-banner" role="dialog" aria-label="Cookie consent" style="display:none;position:fixed;left:16px;right:16px;bottom:16px;max-width:560px;margin:0 auto;background:#151b23;color:#f4f2ec;border-radius:8px;padding:16px 18px;font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:9999;">
+  <p style="margin:0 0 10px;">This site uses cookies to understand usage and show relevant ads. <a href="privacy-policy.html" style="color:#3fa980;">Learn more</a></p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+    <button onclick="dnCookieChoice('accept')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:none;cursor:pointer;background:#3fa980;color:#151b23;">Accept all</button>
+    <button onclick="dnCookieChoice('reject')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:1px solid #555;cursor:pointer;background:transparent;color:#f4f2ec;">Reject non-essential</button>
+  </div>
+</div>
+<script>
+  function dnCookieChoice(choice){
+    try{ localStorage.setItem('devnotes-cookie-consent', choice); }catch(e){}
+    var b = document.getElementById('dn-cookie-banner');
+    if(b) b.style.display = 'none';
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    try{
+      if(!localStorage.getItem('devnotes-cookie-consent')){
+        var b = document.getElementById('dn-cookie-banner');
+        if(b) b.style.display = 'block';
+      }
+    }catch(e){}
+  });
+</script>
+
+<script>
+  function refreshCompleteButton(){
+    const btn = document.getElementById('complete-btn');
+    const done = dnIsComplete('html-css', '03');
+    btn.textContent = done ? '✓ Lesson completed' : 'Mark lesson as complete';
+    btn.classList.toggle('done', done);
+  }
+  function markComplete(){
+    dnToggleComplete('html-css', '03');
+    refreshCompleteButton();
+  }
+  document.addEventListener('DOMContentLoaded', refreshCompleteButton);
+</script>
+
+</body>
+</html>
