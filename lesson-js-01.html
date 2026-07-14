@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>
+  (function(){
+    try{
+      if(localStorage.getItem('devnotes-license-verified') !== 'true'){
+        window.location.replace('unlock.html');
+      }
+    }catch(e){
+      window.location.replace('unlock.html');
+    }
+  })();
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7954849947139093" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Lesson 1: Variables, data types, and your first JavaScript script. Premium lesson for devnotes members.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>Lesson 1: Variables & Data Types — devnotes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  function dnGetProgress(){
+    try{ return JSON.parse(localStorage.getItem('devnotes-progress') || '{}'); }
+    catch(e){ return {}; }
+  }
+  function dnSaveProgress(p){
+    try{ localStorage.setItem('devnotes-progress', JSON.stringify(p)); }catch(e){}
+  }
+  function dnIsComplete(course, lessonId){
+    const p = dnGetProgress();
+    return !!(p[course] && p[course][lessonId]);
+  }
+  function dnToggleComplete(course, lessonId){
+    const p = dnGetProgress();
+    if(!p[course]) p[course] = {};
+    p[course][lessonId] = !p[course][lessonId];
+    dnSaveProgress(p);
+    return p[course][lessonId];
+  }
+</script>
+<style>
+  :root{--ink:#151b23;--paper:#f4f2ec;--panel:#ffffff;--line:#d8d3c5;--amber:#e0932e;--mint:#3fa980;--muted:#6b6558;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;line-height:1.6;}
+  a{color:inherit;}
+  header{border-bottom:2px solid var(--ink);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;background:var(--paper);position:sticky;top:0;z-index:10;}
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:18px;letter-spacing:-0.5px;text-decoration:none;}
+  .logo span{color:var(--amber);}
+  .back{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);text-decoration:none;}
+
+  .member-bar{background:var(--ink);color:#c9d1d9;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;}
+  .member-bar span{color:var(--mint);}
+
+  .complete-bar{max-width:720px;margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
+  .complete-btn{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;padding:10px 18px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;border-radius:4px;}
+  .complete-btn.done{background:var(--mint);border-color:var(--mint);color:var(--ink);}
+
+  main{max-width:720px;margin:0 auto;padding:16px 24px 30px;}
+  .crumbs{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:18px;}
+  .crumbs a{color:var(--mint);}
+  .filetag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mint);background:#eaf5ef;display:inline-block;padding:2px 8px;border-radius:3px;margin-bottom:16px;}
+  h1{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:30px;line-height:1.2;letter-spacing:-0.5px;margin-bottom:14px;}
+  .meta{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:30px;border-bottom:1px dashed var(--line);padding-bottom:20px;}
+  .lede{font-size:17px;color:#3a352b;margin-bottom:28px;}
+
+  article h2{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;margin:36px 0 14px;padding-top:6px;border-top:1.5px solid var(--ink);}
+  article p{font-size:16px;margin-bottom:16px;color:#292520;}
+  article ul,article ol{margin:0 0 18px 22px;font-size:16px;color:#292520;}
+  article li{margin-bottom:8px;}
+  strong{color:var(--ink);}
+  code{font-family:'JetBrains Mono',monospace;background:#eae6d8;padding:2px 6px;border-radius:3px;font-size:14px;}
+
+  .code-block{background:var(--ink);color:#c9d1d9;font-family:'JetBrains Mono',monospace;font-size:13.5px;padding:18px 20px;border-radius:6px;margin:18px 0;white-space:pre;overflow-x:auto;line-height:1.6;}
+  .code-block .cmt{color:#6b7280;}
+  .code-block .str{color:var(--amber);}
+  .code-block .kw{color:#8fb8ff;}
+
+  table{width:100%;border-collapse:collapse;margin:20px 0 26px;font-size:14.5px;}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;}
+  th{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--panel);}
+  td{background:#fbfaf6;}
+  td code{background:transparent;padding:0;}
+
+  .callout{background:var(--panel);border:1.5px solid var(--line);border-left:4px solid var(--amber);padding:16px 18px;margin:22px 0;font-size:14.5px;}
+  .callout .label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+  .callout.exercise{border-left-color:var(--mint);}
+  .callout.exercise .label{color:var(--mint);}
+
+  .ad-slot{max-width:720px;margin:36px auto;padding:0 24px;}
+  .ad-slot .box{border:1.5px dashed var(--line);background:#ece8dc;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;text-align:center;padding:18px;}
+
+  .next-nav{max-width:720px;margin:40px auto 0;padding:20px 24px;border:1.5px solid var(--line);background:var(--panel);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+  .next-nav span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);}
+  .next-nav strong{display:block;font-size:15px;margin-top:2px;}
+
+  footer{margin-top:50px;border-top:2px solid var(--ink);padding:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+</style>
+</head>
+<body>
+
+<div class="member-bar">🔒 <span>Members-only lesson</span> — thanks for supporting devnotes</div>
+
+<header>
+  <a class="logo" href="index.html">dev<span>notes</span>._</a>
+  <a class="back" href="course-javascript.html">&larr; back to course</a>
+</header>
+
+<div class="complete-bar">
+  <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);">progress is saved in this browser — no account needed</span>
+  <button class="complete-btn" id="complete-btn" onclick="markComplete()">Mark lesson as complete</button>
+</div>
+
+<main>
+  <div class="crumbs"><a href="index.html">devnotes</a> / <a href="course-javascript.html">JavaScript Basics</a> / Lesson 1</div>
+  <span class="filetag">lesson 1 of 6 · premium</span>
+  <h1>Variables, Data Types &amp; Your First Script</h1>
+  <div class="meta">18 min · JavaScript Basics</div>
+
+  <p class="lede">HTML gives a page structure. CSS makes it look good. JavaScript is what makes it <em>do</em> things — react to clicks, update without reloading, remember information. This lesson is where your pages stop being static and start being programs.</p>
+
+  <article>
+    <h2>What JavaScript actually does</h2>
+    <p>JavaScript runs directly in the browser, on the same page you built with HTML and CSS. It can change text, styles, and structure after the page has already loaded — something HTML and CSS alone can't do on their own. Every dropdown menu, live form validation, and "like" button you've ever clicked was JavaScript running behind the scenes.</p>
+
+    <h2>Adding JavaScript to a page</h2>
+    <p>Same pattern as CSS in Lesson 2 of the HTML &amp; CSS course: you can write it inline, internally, or in an external file. External is standard for anything beyond a quick test.</p>
+    <div class="code-block">&lt;<span class="kw">script</span> src="script.js"&gt;&lt;/<span class="kw">script</span>&gt;
+<span class="cmt">// placed right before the closing &lt;/body&gt; tag, so the page loads first</span></div>
+
+    <h2>Variables: storing information with a name</h2>
+    <p>A variable is a labeled container for a piece of data. Modern JavaScript gives you two ways to create one:</p>
+    <div class="code-block"><span class="kw">let</span> age = 25;        <span class="cmt">// can be reassigned later</span>
+<span class="kw">const</span> name = "Alex";  <span class="cmt">// cannot be reassigned once set</span></div>
+    <p>Use <code>const</code> by default — it's safer because it prevents accidental reassignment. Only use <code>let</code> when you genuinely expect the value to change, like a counter or a running total.</p>
+
+    <div class="callout">
+      <div class="label">quick tip</div>
+      You might see older code using <code>var</code> instead of <code>let</code>/<code>const</code>. It still works, but it has confusing quirks that modern JavaScript avoids entirely — there's no good reason to use it in new code today.
+    </div>
+
+    <h2>The core data types</h2>
+    <table>
+      <tr><th>Type</th><th>Example</th><th>Used for</th></tr>
+      <tr><td>String</td><td><code>"hello"</code></td><td>Text — always in quotes</td></tr>
+      <tr><td>Number</td><td><code>42</code>, <code>3.14</code></td><td>Any number — no separate type for decimals</td></tr>
+      <tr><td>Boolean</td><td><code>true</code>, <code>false</code></td><td>Yes/no, on/off logic</td></tr>
+      <tr><td>Array</td><td><code>["a", "b", "c"]</code></td><td>An ordered list of values</td></tr>
+      <tr><td>Object</td><td><code>{ name: "Alex", age: 25 }</code></td><td>Labeled data grouped together</td></tr>
+    </table>
+    <p>We'll go deep on arrays and objects in Lesson 3 — for now, just recognize them when you see them.</p>
+
+    <h2>console.log: your best debugging friend</h2>
+    <div class="code-block"><span class="kw">const</span> greeting = "Hello, world!";
+console.log(greeting); <span class="cmt">// prints the value to the browser's console</span></div>
+    <p>This is the single most-used line in every JavaScript developer's workflow. It prints a value where you can see it — open your browser's dev tools (right-click → Inspect → Console tab) to see it in action. When something isn't working, sprinkling <code>console.log()</code> around your code to see what's actually happening is the standard first move, not a beginner crutch.</p>
+
+    <div class="ad-slot" style="margin:30px auto;"><div class="box">AD SLOT — 728×90 or responsive (mid-lesson)</div></div>
+
+    <h2>Basic operators</h2>
+    <div class="code-block"><span class="kw">const</span> total = 10 + 5;      <span class="cmt">// 15 — math works as expected</span>
+<span class="kw">const</span> combined = "Hi " + "there"; <span class="cmt">// "Hi there" — + joins strings too</span>
+<span class="kw">const</span> isAdult = age &gt;= 18;   <span class="cmt">// true or false</span>
+<span class="kw">const</span> isEqual = age === 25;   <span class="cmt">// use === not =, to compare values</span></div>
+    <div class="callout">
+      <div class="label">common mistake</div>
+      A single <code>=</code> assigns a value. A triple <code>===</code> compares two values. Mixing these up is one of the most common bugs beginners write — <code>if (age = 18)</code> silently sets age to 18 instead of checking it, and doesn't throw an error, which makes it sneaky to spot.
+    </div>
+
+    <h2>Comments: notes JavaScript ignores</h2>
+    <div class="code-block"><span class="cmt">// a single-line comment</span>
+
+<span class="cmt">/* a comment
+   that spans
+   multiple lines */</span></div>
+
+    <h2>Try it yourself</h2>
+    <div class="callout exercise">
+      <div class="label">exercise</div>
+      In your Lesson 1 HTML page (from the HTML &amp; CSS course), add <code>&lt;script&gt;</code> tags right before <code>&lt;/body&gt;</code>. Inside, create three variables — your name, your age, and whether you're currently learning to code (true/false) — and <code>console.log()</code> each one. Open the browser console and confirm you see all three values.
+    </div>
+
+    <h2>Level up: build a mini profile</h2>
+    <div class="callout exercise">
+      <div class="label">exercise 2</div>
+      Create a <code>const</code> variable that combines your name and age into one sentence using <code>+</code>, like <code>"Alex is 25 years old"</code>, and log it. This is your first taste of building dynamic text from separate pieces of data — exactly what powers things like personalized greetings on real websites.
+    </div>
+
+    <div class="callout">
+      <div class="label">what's next</div>
+      Lesson 2 covers functions and control flow — how to make your code actually make decisions (if/else) and repeat actions (loops), instead of just running top to bottom once.
+    </div>
+
+    <div class="callout">
+      <div class="label">bottom line</div>
+      Variables store data with <code>let</code> or <code>const</code>, JavaScript has five core data types you'll use constantly, and <code>console.log()</code> is how you see what your code is actually doing. Everything else in this course builds on these basics.
+    </div>
+  </article>
+</main>
+
+<div class="ad-slot"><div class="box">AD SLOT — 300×250 or responsive (in-lesson)</div></div>
+
+<div class="next-nav">
+  <div><span>next up</span><strong>Lesson 2: Functions and Control Flow — coming soon</strong></div>
+  <a href="course-javascript.html" class="back">view all lessons →</a>
+</div>
+
+<footer>
+  <span>© 2026 devnotes — made with coffee and console.log()</span>
+  <span><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-of-service.html">Terms</a> · <a href="https://ko-fi.com/jw0405" target="_blank" rel="noopener">☕ Support us</a> · <a href="index.html">back to home</a></span>
+</footer>
+
+<div id="dn-cookie-banner" role="dialog" aria-label="Cookie consent" style="display:none;position:fixed;left:16px;right:16px;bottom:16px;max-width:560px;margin:0 auto;background:#151b23;color:#f4f2ec;border-radius:8px;padding:16px 18px;font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:9999;">
+  <p style="margin:0 0 10px;">This site uses cookies to understand usage and show relevant ads. <a href="privacy-policy.html" style="color:#3fa980;">Learn more</a></p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+    <button onclick="dnCookieChoice('accept')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:none;cursor:pointer;background:#3fa980;color:#151b23;">Accept all</button>
+    <button onclick="dnCookieChoice('reject')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:1px solid #555;cursor:pointer;background:transparent;color:#f4f2ec;">Reject non-essential</button>
+  </div>
+</div>
+<script>
+  function dnCookieChoice(choice){
+    try{ localStorage.setItem('devnotes-cookie-consent', choice); }catch(e){}
+    var b = document.getElementById('dn-cookie-banner');
+    if(b) b.style.display = 'none';
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    try{
+      if(!localStorage.getItem('devnotes-cookie-consent')){
+        var b = document.getElementById('dn-cookie-banner');
+        if(b) b.style.display = 'block';
+      }
+    }catch(e){}
+  });
+</script>
+
+<script>
+  function refreshCompleteButton(){
+    const btn = document.getElementById('complete-btn');
+    const done = dnIsComplete('javascript', '01');
+    btn.textContent = done ? '✓ Lesson completed' : 'Mark lesson as complete';
+    btn.classList.toggle('done', done);
+  }
+  function markComplete(){
+    dnToggleComplete('javascript', '01');
+    refreshCompleteButton();
+  }
+  document.addEventListener('DOMContentLoaded', refreshCompleteButton);
+</script>
+
+</body>
+</html>
