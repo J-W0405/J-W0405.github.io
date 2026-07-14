@@ -2,6 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+  // Guard: redirect immediately if not verified — runs before content is visible
+  (function(){
+    try{
+      if(localStorage.getItem('devnotes-license-verified') !== 'true'){
+        window.location.replace('unlock.html');
+      }
+    }catch(e){
+      window.location.replace('unlock.html');
+    }
+  })();
+</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7954849947139093" crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Lesson 3: The Box Model, finally explained — content, padding, border, margin, and box-sizing. Premium lesson for devnotes members.">

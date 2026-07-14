@@ -21,12 +21,12 @@
       name: 'HTML & CSS Fundamentals',
       url: 'course-html-css.html',
       lessons: [
-        { id: '01', name: 'What Is HTML? Build Your First Web Page', url: 'lesson-html-css-01.html', live: true },
-        { id: '02', name: 'Styling With CSS: Colors, Fonts & Spacing', url: null, live: false },
-        { id: '03', name: 'The Box Model, Finally Explained', url: null, live: false },
-        { id: '04', name: "Flexbox: Layouts That Don't Break", url: null, live: false },
-        { id: '05', name: 'CSS Grid for Real Page Layouts', url: null, live: false },
-        { id: '06', name: 'Project: Build a Complete Landing Page', url: null, live: false }
+        { id: '01', name: 'What Is HTML? Build Your First Web Page', url: 'lesson-html-css-01.html', live: true, built: true },
+        { id: '02', name: 'Styling With CSS: Colors, Fonts & Spacing', url: null, live: false, built: true },
+        { id: '03', name: 'The Box Model, Finally Explained', url: null, live: false, built: true },
+        { id: '04', name: "Flexbox: Layouts That Don't Break", url: null, live: false, built: false },
+        { id: '05', name: 'CSS Grid for Real Page Layouts', url: null, live: false, built: false },
+        { id: '06', name: 'Project: Build a Complete Landing Page', url: null, live: false, built: false }
       ]
     },
     'javascript': { name: 'JavaScript Basics', url: null, lessons: [] },
@@ -156,6 +156,8 @@
           if(l.live){
             const done = dnIsComplete(key, l.id);
             rowsHtml += '<div class="lesson-row"><div class="box' + (done ? ' done' : '') + '">' + (done ? '✓' : '') + '</div><a href="' + l.url + '">' + l.name + '</a></div>';
+          } else if(l.built){
+            rowsHtml += '<div class="lesson-row locked"><div class="box">🔒</div><span>' + l.name + ' — <a href="unlock.html" style="color:var(--mint);">included with membership</a></span></div>';
           } else {
             rowsHtml += '<div class="lesson-row locked"><div class="box">·</div><span>' + l.name + ' — coming soon</span></div>';
           }

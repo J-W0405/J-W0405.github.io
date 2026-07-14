@@ -163,6 +163,18 @@
   body.lang-es .pillars{display:grid;}
   body.lang-es header, body.lang-es .header-right, body.lang-es .lang-switch{display:flex;}
   body.lang-es .section-head{display:flex;}
+
+  .trust-strip{
+    max-width:1100px;margin:20px auto 0;padding:0 24px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  }
+  @media(max-width:820px){.trust-strip{grid-template-columns:1fr 1fr;}}
+  .trust-item{
+    border:1.5px solid var(--line);background:var(--panel);
+    padding:14px;text-align:center;font-size:12.5px;color:var(--muted);
+  }
+  .trust-item .ic{font-size:20px;display:block;margin-bottom:6px;}
+  .trust-item strong{display:block;color:var(--ink);font-size:12.5px;margin-bottom:2px;}
 </style>
 </head>
 <body>
@@ -175,6 +187,7 @@
       <li><a href="#articles">Articles</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="my-learning.html" id="nav-progress">My Learning</a></li>
+      <li><a href="unlock.html">Member Login</a></li>
     </ul></nav>
     <div class="lang-switch">
       <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
@@ -333,6 +346,13 @@
 </div>
 
 <div class="ad-slot" style="margin-top:30px;"><div class="box">AD SLOT — 728×90 (replace with your AdSense/Ezoic code)</div></div>
+
+<div class="trust-strip">
+  <div class="trust-item"><span class="ic">🔒</span><strong data-en>Secure checkout</strong><strong data-es>Pago seguro</strong><span data-en>Payment handled by Gumroad — we never see your card details</span><span data-es>Pago procesado por Gumroad — nunca vemos tu tarjeta</span></div>
+  <div class="trust-item"><span class="ic">↩️</span><strong data-en>Cancel anytime</strong><strong data-es>Cancela cuando quieras</strong><span data-en>No contract, no lock-in</span><span data-es>Sin contrato, sin ataduras</span></div>
+  <div class="trust-item"><span class="ic">🧾</span><strong data-en>Clear policies</strong><strong data-es>Políticas claras</strong><span><a href="terms-of-service.html" style="color:var(--mint);">Terms</a> · <a href="privacy-policy.html" style="color:var(--mint);">Privacy</a></span></div>
+  <div class="trust-item"><span class="ic">📧</span><strong data-en>Real support</strong><strong data-es>Soporte real</strong><span><a href="mailto:devnotes.help@gmail.com" style="color:var(--mint);">devnotes.help@gmail.com</a></span></div>
+</div>
 
 <footer>
   <span data-en>© 2026 devnotes — made with coffee and console.log()</span>
