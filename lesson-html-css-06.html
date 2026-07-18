@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>
+  (function(){
+    try{
+      if(localStorage.getItem('devnotes-license-verified') !== 'true'){
+        window.location.replace('unlock.html');
+      }
+    }catch(e){
+      window.location.replace('unlock.html');
+    }
+  })();
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7954849947139093" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Lesson 6: Final project — build a complete landing page using everything from the HTML & CSS Fundamentals course.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>Lesson 6: Final Project — devnotes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  function dnGetProgress(){ try{ return JSON.parse(localStorage.getItem('devnotes-progress') || '{}'); }catch(e){ return {}; } }
+  function dnSaveProgress(p){ try{ localStorage.setItem('devnotes-progress', JSON.stringify(p)); }catch(e){} }
+  function dnIsComplete(course, lessonId){ const p = dnGetProgress(); return !!(p[course] && p[course][lessonId]); }
+  function dnToggleComplete(course, lessonId){ const p = dnGetProgress(); if(!p[course]) p[course] = {}; p[course][lessonId] = !p[course][lessonId]; dnSaveProgress(p); return p[course][lessonId]; }
+</script>
+<style>
+  :root{--ink:#151b23;--paper:#f4f2ec;--panel:#ffffff;--line:#d8d3c5;--amber:#e0932e;--mint:#3fa980;--muted:#6b6558;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;line-height:1.6;}
+  a{color:inherit;}
+  header{border-bottom:2px solid var(--ink);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;background:var(--paper);position:sticky;top:0;z-index:10;}
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:18px;letter-spacing:-0.5px;text-decoration:none;}
+  .logo span{color:var(--amber);}
+  .back{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);text-decoration:none;}
+  .member-bar{background:var(--ink);color:#c9d1d9;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;}
+  .member-bar span{color:var(--mint);}
+  .complete-bar{max-width:720px;margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
+  .complete-btn{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;padding:10px 18px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;border-radius:4px;}
+  .complete-btn.done{background:var(--mint);border-color:var(--mint);color:var(--ink);}
+  main{max-width:720px;margin:0 auto;padding:16px 24px 30px;}
+  .crumbs{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:18px;}
+  .crumbs a{color:var(--mint);}
+  .filetag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mint);background:#eaf5ef;display:inline-block;padding:2px 8px;border-radius:3px;margin-bottom:16px;}
+  h1{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:30px;line-height:1.2;letter-spacing:-0.5px;margin-bottom:14px;}
+  .meta{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:30px;border-bottom:1px dashed var(--line);padding-bottom:20px;}
+  .lede{font-size:17px;color:#3a352b;margin-bottom:28px;}
+  article h2{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;margin:36px 0 14px;padding-top:6px;border-top:1.5px solid var(--ink);}
+  article p{font-size:16px;margin-bottom:16px;color:#292520;}
+  article ul,article ol{margin:0 0 18px 22px;font-size:16px;color:#292520;}
+  article li{margin-bottom:8px;}
+  strong{color:var(--ink);}
+  code{font-family:'JetBrains Mono',monospace;background:#eae6d8;padding:2px 6px;border-radius:3px;font-size:14px;}
+  .code-block{background:var(--ink);color:#c9d1d9;font-family:'JetBrains Mono',monospace;font-size:13px;padding:18px 20px;border-radius:6px;margin:18px 0;white-space:pre;overflow-x:auto;line-height:1.55;}
+  .code-block .cmt{color:#6b7280;}
+  .code-block .tag{color:#7dd3a8;}
+  .steps{counter-reset:step;margin:24px 0;}
+  .step{display:grid;grid-template-columns:40px 1fr;gap:14px;margin-bottom:18px;}
+  .step .n{counter-increment:step;font-family:'JetBrains Mono',monospace;font-weight:800;font-size:15px;background:var(--ink);color:var(--paper);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+  .step .n::before{content:counter(step);}
+  .step h3{font-size:15.5px;margin-bottom:4px;}
+  .step p{font-size:15px;color:#3a352b;margin-bottom:0;}
+  .callout{background:var(--panel);border:1.5px solid var(--line);border-left:4px solid var(--amber);padding:16px 18px;margin:22px 0;font-size:14.5px;}
+  .callout .label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+  .callout.exercise{border-left-color:var(--mint);}
+  .callout.exercise .label{color:var(--mint);}
+  .completion-banner{
+    background:linear-gradient(135deg,var(--mint),var(--amber));border-radius:10px;padding:30px 28px;margin:30px 0;text-align:center;color:var(--ink);
+  }
+  .completion-banner .big{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:22px;margin-bottom:6px;}
+  .completion-banner p{color:#151b23;font-size:14.5px;max-width:44ch;margin:0 auto;}
+  .ad-slot{max-width:720px;margin:36px auto;padding:0 24px;}
+  .ad-slot .box{border:1.5px dashed var(--line);background:#ece8dc;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;text-align:center;padding:18px;}
+  .next-nav{max-width:720px;margin:40px auto 0;padding:20px 24px;border:1.5px solid var(--line);background:var(--panel);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+  .next-nav span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);}
+  .next-nav strong{display:block;font-size:15px;margin-top:2px;}
+  footer{margin-top:50px;border-top:2px solid var(--ink);padding:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+</style>
+</head>
+<body>
+
+<div class="member-bar">🔒 <span>Members-only lesson</span> — thanks for supporting devnotes</div>
+<header>
+  <a class="logo" href="index.html">dev<span>notes</span>._</a>
+  <a class="back" href="course-html-css.html">&larr; back to course</a>
+</header>
+<div class="complete-bar">
+  <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);">progress is saved in this browser — no account needed</span>
+  <button class="complete-btn" id="complete-btn" onclick="markComplete()">Mark lesson as complete</button>
+</div>
+
+<main>
+  <div class="crumbs"><a href="index.html">devnotes</a> / <a href="course-html-css.html">HTML &amp; CSS Fundamentals</a> / Lesson 6</div>
+  <span class="filetag">lesson 6 of 6 · final project</span>
+  <h1>Final Project: Build a Complete Landing Page</h1>
+  <div class="meta">30 min · HTML &amp; CSS Fundamentals</div>
+
+  <p class="lede">No new concepts this time — this lesson is about combining everything from the last five lessons into one real, finished page: semantic structure, the box model, Flexbox, and Grid, all working together.</p>
+
+  <article>
+    <h2>What you're building</h2>
+    <p>A simple one-page site for a fictional small business: a sticky navigation bar, a hero section, a 3-column features section, and a footer. This exact structure — nav, hero, features, footer — is one of the most common patterns on the web, so it's worth building it once by hand.</p>
+
+    <div class="steps">
+      <div class="step"><div class="n"></div><div><h3>Structure the skeleton</h3><p>Start with semantic tags: <code>&lt;header&gt;</code> for your nav, <code>&lt;main&gt;</code> wrapping a hero <code>&lt;section&gt;</code> and a features <code>&lt;section&gt;</code>, and <code>&lt;footer&gt;</code> at the end.</p></div></div>
+      <div class="step"><div class="n"></div><div><h3>Build the nav with Flexbox</h3><p><code>display: flex; justify-content: space-between; align-items: center;</code> on the header — logo on the left, links on the right, all vertically centered.</p></div></div>
+      <div class="step"><div class="n"></div><div><h3>Center the hero content</h3><p>Give the hero <code>display: flex; flex-direction: column; align-items: center; text-align: center;</code> with generous padding, so the heading and button sit centered with breathing room.</p></div></div>
+      <div class="step"><div class="n"></div><div><h3>Grid the features section</h3><p><code>display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px;</code> — three feature cards that automatically reflow on smaller screens.</p></div></div>
+      <div class="step"><div class="n"></div><div><h3>Apply box-sizing everywhere</h3><p>Add <code>* { box-sizing: border-box; }</code> at the top of your stylesheet so every width and padding behaves predictably.</p></div></div>
+      <div class="step"><div class="n"></div><div><h3>Constrain and center the page</h3><p>Wrap your content sections in a container with <code>max-width: 1000px; margin: 0 auto;</code> so the layout doesn't stretch uncomfortably wide on large screens.</p></div></div>
+    </div>
+
+    <div class="code-block">&lt;<span class="tag">header</span> class="nav"&gt;
+  &lt;<span class="tag">div</span> class="logo"&gt;YourBrand&lt;/<span class="tag">div</span>&gt;
+  &lt;<span class="tag">nav</span>&gt;
+    &lt;<span class="tag">a</span> href="#"&gt;Home&lt;/<span class="tag">a</span>&gt;
+    &lt;<span class="tag">a</span> href="#"&gt;Features&lt;/<span class="tag">a</span>&gt;
+    &lt;<span class="tag">a</span> href="#"&gt;Contact&lt;/<span class="tag">a</span>&gt;
+  &lt;/<span class="tag">nav</span>&gt;
+&lt;/<span class="tag">header</span>&gt;
+
+&lt;<span class="tag">main</span>&gt;
+  &lt;<span class="tag">section</span> class="hero"&gt;
+    &lt;<span class="tag">h1</span>&gt;Build something great&lt;/<span class="tag">h1</span>&gt;
+    &lt;<span class="tag">p</span>&gt;A one-line pitch for your product goes here.&lt;/<span class="tag">p</span>&gt;
+    &lt;<span class="tag">button</span>&gt;Get started&lt;/<span class="tag">button</span>&gt;
+  &lt;/<span class="tag">section</span>&gt;
+
+  &lt;<span class="tag">section</span> class="features"&gt;
+    &lt;<span class="tag">div</span> class="card"&gt;&lt;<span class="tag">h3</span>&gt;Fast&lt;/<span class="tag">h3</span>&gt;&lt;<span class="tag">p</span>&gt;...&lt;/<span class="tag">p</span>&gt;&lt;/<span class="tag">div</span>&gt;
+    &lt;<span class="tag">div</span> class="card"&gt;&lt;<span class="tag">h3</span>&gt;Simple&lt;/<span class="tag">h3</span>&gt;&lt;<span class="tag">p</span>&gt;...&lt;/<span class="tag">p</span>&gt;&lt;/<span class="tag">div</span>&gt;
+    &lt;<span class="tag">div</span> class="card"&gt;&lt;<span class="tag">h3</span>&gt;Reliable&lt;/<span class="tag">h3</span>&gt;&lt;<span class="tag">p</span>&gt;...&lt;/<span class="tag">p</span>&gt;&lt;/<span class="tag">div</span>&gt;
+  &lt;/<span class="tag">section</span>&gt;
+&lt;/<span class="tag">main</span>&gt;
+
+&lt;<span class="tag">footer</span>&gt;© 2026 YourBrand&lt;/<span class="tag">footer</span>&gt;</div>
+
+    <div class="code-block">* { box-sizing: border-box; }
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.card {
+  padding: 24px;
+  border-radius: 8px;
+}</div>
+
+    <h2>Try it yourself</h2>
+    <div class="callout exercise">
+      <div class="label">the project</div>
+      Build this page start to finish in your own <code>index.html</code> and <code>&lt;style&gt;</code> block. Don't just copy-paste the code above — type it out, and make it your own: change the colors, the copy, the fonts. Resize your browser at every step to confirm the nav, hero, and grid all stay responsive.
+    </div>
+
+    <h2>Where to go from here</h2>
+    <p>You've now built real structure, styled it, understood exactly how sizing works, and laid out a page two different ways. That's genuinely the foundation every web developer builds on — from here, JavaScript is what turns this static page into something interactive, which is exactly where the JavaScript Basics course picks up.</p>
+
+    <div class="completion-banner">
+      <div class="big">🎉 Course complete: HTML &amp; CSS Fundamentals</div>
+      <p>You've finished all 6 lessons. Structure, styling, the box model, Flexbox, and Grid — that's a real foundation. Time to make it interactive.</p>
+    </div>
+  </article>
+</main>
+
+<div class="ad-slot"><div class="box">AD SLOT — 300×250 or responsive (in-lesson)</div></div>
+
+<div class="next-nav">
+  <div><span>next up</span><strong>JavaScript Basics — Lesson 1: Variables &amp; Data Types</strong></div>
+  <a href="course-javascript.html" class="back">start JavaScript →</a>
+</div>
+
+<footer>
+  <span>© 2026 devnotes — made with coffee and console.log()</span>
+  <span><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-of-service.html">Terms</a> · <a href="https://ko-fi.com/jw0405" target="_blank" rel="noopener">☕ Support us</a> · <a href="index.html">back to home</a></span>
+</footer>
+
+<div id="dn-cookie-banner" role="dialog" aria-label="Cookie consent" style="display:none;position:fixed;left:16px;right:16px;bottom:16px;max-width:560px;margin:0 auto;background:#151b23;color:#f4f2ec;border-radius:8px;padding:16px 18px;font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:9999;">
+  <p style="margin:0 0 10px;">This site uses cookies to understand usage and show relevant ads. <a href="privacy-policy.html" style="color:#3fa980;">Learn more</a></p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+    <button onclick="dnCookieChoice('accept')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:none;cursor:pointer;background:#3fa980;color:#151b23;">Accept all</button>
+    <button onclick="dnCookieChoice('reject')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:1px solid #555;cursor:pointer;background:transparent;color:#f4f2ec;">Reject non-essential</button>
+  </div>
+</div>
+<script>
+  function dnCookieChoice(choice){
+    try{ localStorage.setItem('devnotes-cookie-consent', choice); }catch(e){}
+    var b = document.getElementById('dn-cookie-banner');
+    if(b) b.style.display = 'none';
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    try{
+      if(!localStorage.getItem('devnotes-cookie-consent')){
+        var b = document.getElementById('dn-cookie-banner');
+        if(b) b.style.display = 'block';
+      }
+    }catch(e){}
+  });
+</script>
+
+<script>
+  function refreshCompleteButton(){
+    const btn = document.getElementById('complete-btn');
+    const done = dnIsComplete('html-css', '06');
+    btn.textContent = done ? '✓ Lesson completed' : 'Mark lesson as complete';
+    btn.classList.toggle('done', done);
+  }
+  function markComplete(){
+    dnToggleComplete('html-css', '06');
+    refreshCompleteButton();
+  }
+  document.addEventListener('DOMContentLoaded', refreshCompleteButton);
+</script>
+
+</body>
+</html>
