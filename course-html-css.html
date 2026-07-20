@@ -152,14 +152,14 @@
   <div class="progress" id="progress-text">1 of 6 lessons available</div>
   <div class="progress-bar-track"><div class="progress-bar-fill" id="progress-bar"></div></div>
 
-  <div class="pricing-card">
+  <div class="pricing-card" id="pricing-card">
     <div>
-      <div class="label">membership · cancel anytime</div>
-      <h3>Unlock every lesson, as they drop</h3>
-      <p>Your membership gets you all remaining HTML &amp; CSS lessons, plus the full JavaScript and Developer Tools courses as they're released — for as long as you're subscribed.</p>
+      <div class="label" id="pricing-label">membership · cancel anytime</div>
+      <h3 id="pricing-title">Unlock every lesson, as they drop</h3>
+      <p id="pricing-desc">Your membership gets you all remaining HTML &amp; CSS lessons, plus the full JavaScript and Developer Tools courses as they're released — for as long as you're subscribed.</p>
     </div>
     <div style="text-align:right;">
-      <div class="price">$15 <span>/ month</span></div>
+      <div class="price" id="pricing-price">$15 <span>/ month</span></div>
       <br>
       <a class="pricing-btn" href="https://gallegowave76.gumroad.com/l/wiunew" id="gumroad-link" target="_blank" rel="noopener">Get Full Access →</a>
     </div>
@@ -246,6 +246,25 @@
       if(!localStorage.getItem('devnotes-cookie-consent')){
         var b = document.getElementById('dn-cookie-banner');
         if(b) b.style.display = 'block';
+      }
+    }catch(e){}
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    try{
+      if(localStorage.getItem('devnotes-license-verified') === 'true'){
+        document.getElementById('pricing-card').style.background = '#1e2a22';
+        document.getElementById('pricing-label').textContent = '✓ active member';
+        document.getElementById('pricing-title').textContent = "You already have full access";
+        document.getElementById('pricing-desc').textContent = 'Head to your members hub to see every lesson available right now.';
+        document.getElementById('pricing-price').style.display = 'none';
+        var btn = document.getElementById('gumroad-link');
+        btn.textContent = 'Go to Members Hub →';
+        btn.href = 'members-hub.html';
+        btn.removeAttribute('target');
+        btn.removeAttribute('rel');
       }
     }catch(e){}
   });

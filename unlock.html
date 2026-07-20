@@ -2,6 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+  // If already verified in this browser, skip straight to the members hub
+  (function(){
+    try{
+      if(localStorage.getItem('devnotes-license-verified') === 'true'){
+        window.location.replace('members-hub.html');
+      }
+    }catch(e){}
+  })();
+</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7954849947139093" crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Unlock your devnotes membership content with your Gumroad license key.">
