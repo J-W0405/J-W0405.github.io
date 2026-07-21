@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7954849947139093" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A practical guide to writing AI prompts that actually get you what you want — clear, specific, and assertive about the outcome you're after.">
+<meta property="og:title" content="How to Write Prompts That Actually Get You What You Want — devnotes">
+<meta property="og:description" content="A practical guide to writing AI prompts that actually get you what you want — clear, specific, and assertive about the outcome you're after.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="og-image.png">
+<meta property="og:url" content="https://j-w0405.github.io/how-to-write-effective-ai-prompts.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>How to Write Prompts That Actually Get You What You Want — devnotes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#151b23;--paper:#f4f2ec;--panel:#ffffff;--line:#d8d3c5;--amber:#e0932e;--mint:#3fa980;--muted:#6b6558;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;line-height:1.6;}
+  a{color:inherit;}
+  header{border-bottom:2px solid var(--ink);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;background:var(--paper);position:sticky;top:0;z-index:10;}
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:18px;letter-spacing:-0.5px;text-decoration:none;}
+  .logo span{color:var(--amber);}
+  .back{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);text-decoration:none;}
+  main{max-width:720px;margin:0 auto;padding:48px 24px 30px;}
+  .filetag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mint);background:#eaf5ef;display:inline-block;padding:2px 8px;border-radius:3px;margin-bottom:16px;}
+  h1{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:30px;line-height:1.2;letter-spacing:-0.5px;margin-bottom:14px;}
+  .meta{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:30px;border-bottom:1px dashed var(--line);padding-bottom:20px;}
+  .lede{font-size:17px;color:#3a352b;margin-bottom:28px;}
+  article h2{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;margin:36px 0 14px;padding-top:6px;border-top:1.5px solid var(--ink);}
+  article p{font-size:16px;margin-bottom:16px;color:#292520;}
+  article ul,article ol{margin:0 0 18px 22px;font-size:16px;color:#292520;}
+  article li{margin-bottom:8px;}
+  strong{color:var(--ink);}
+  code{font-family:'JetBrains Mono',monospace;background:#eae6d8;padding:2px 6px;border-radius:3px;font-size:14px;}
+  .prompt-example{background:var(--ink);color:#c9d1d9;font-family:'JetBrains Mono',monospace;font-size:13.5px;padding:16px 18px;border-radius:6px;margin:18px 0;white-space:pre-wrap;line-height:1.6;}
+  .prompt-example .p{color:var(--mint);}
+  table{width:100%;border-collapse:collapse;margin:20px 0 26px;font-size:14.5px;}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top;}
+  th{font-family:'JetBrains Mono',monospace;font-size:11.5px;background:var(--panel);}
+  td{background:#fbfaf6;}
+  .callout{background:var(--panel);border:1.5px solid var(--line);border-left:4px solid var(--amber);padding:16px 18px;margin:22px 0;font-size:14.5px;}
+  .callout .label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+  .ad-slot{max-width:720px;margin:36px auto;padding:0 24px;}
+  .ad-slot .box{border:1.5px dashed var(--line);background:#ece8dc;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;text-align:center;padding:18px;}
+  footer{margin-top:60px;border-top:2px solid var(--ink);padding:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">dev<span>notes</span>._</a>
+  <a class="back" href="index.html">&larr; back</a>
+</header>
+
+<main>
+  <span class="filetag">#ai #productivity</span>
+  <h1>How to Write Prompts That Actually Get You What You Want</h1>
+  <div class="meta">10 min read · devnotes</div>
+
+  <p class="lede">Same AI, wildly different results — the only variable is how you asked. Most people get mediocre AI output not because the model is weak, but because the request was vague. Here's how to be specific and assertive about what you actually want, so you stop re-rolling the same question five times.</p>
+
+  <article>
+    <h2>Vague prompts get vague answers</h2>
+    <p>"Write a blog post about productivity" and "write a practical blog post for overwhelmed freelancers about cutting task-switching, using two simple systems they can start today" ask for the same general thing — but only one of them tells the AI enough to actually be useful. The AI isn't guessing what you meant; it's filling gaps you left open, usually with the most generic, average version of an answer.</p>
+
+    <h2>The four things worth stating explicitly</h2>
+    <table>
+      <tr><th>Element</th><th>What it answers</th></tr>
+      <tr><td><strong>Role</strong></td><td>Who should the AI act as? ("You're a senior copywriter," "act as a strict code reviewer")</td></tr>
+      <tr><td><strong>Context</strong></td><td>What's the situation? Who's the audience, what's already been tried, what constraints exist?</td></tr>
+      <tr><td><strong>Task</strong></td><td>The specific action, stated as a clear instruction, not a topic</td></tr>
+      <tr><td><strong>Format</strong></td><td>How should the output look? Length, structure, tone, bullet points vs. prose</td></tr>
+    </table>
+    <p>You don't need all four in every single prompt — but for anything that matters, filling in at least role, context, and format turns a generic answer into something close to usable on the first try.</p>
+
+    <h2>See the difference in practice</h2>
+    <div class="prompt-example"><span class="p">✕ weak prompt:</span>
+"Give me feedback on this email"
+
+<span class="p">✓ prompt with role, context, format:</span>
+"You're a direct, experienced manager. I'm about to send this email
+to push back on a deadline my team can't hit. Give me blunt feedback
+on tone and clarity, then rewrite it in under 100 words, firm but
+professional."</div>
+    <p>The second version doesn't just ask for "feedback" — it defines the lens to give feedback through, the stakes, and exactly what a good output looks like.</p>
+
+    <h2>Give it examples when the format matters</h2>
+    <p>If you have a specific style or structure in mind, showing one or two examples ("few-shot prompting") almost always beats describing it in words. AI is far better at matching a pattern you show it than following an abstract description of that pattern.</p>
+    <div class="prompt-example">"Write 3 more product taglines in this exact style:
+
+- 'Coffee that respects your morning.'
+- 'Sleep, but make it science.'
+
+Same tone: short, a little clever, no exclamation points."</div>
+
+    <div class="ad-slot" style="margin:30px auto;"><div class="box">AD SLOT — 728×90 or responsive (mid-article)</div></div>
+
+    <h2>Ask it to think in steps for anything complex</h2>
+    <p>For reasoning-heavy tasks — debugging, math, multi-part decisions — explicitly asking the AI to work through the problem step by step before giving a final answer noticeably improves accuracy. It's the difference between asking for a conclusion and asking for the reasoning that leads there.</p>
+    <div class="prompt-example">"Walk through this step by step before giving your final answer:
+should I refactor this function now, or ship it as-is and fix it
+next sprint? Consider time cost, risk, and what breaks if I wait."</div>
+
+    <h2>Treat the first response as a draft, not the answer</h2>
+    <p>The people who get consistently good results rarely accept the first output. They read it, then respond with something like "make this more concise," "the tone is too formal, loosen it up," or "this misses X — redo it accounting for that." Iterating two or three times, in the same conversation, almost always beats trying to write one perfect prompt from scratch.</p>
+
+    <div class="callout">
+      <div class="label">quick tip</div>
+      Being assertive doesn't mean being rude — it means not leaving important decisions up to the AI's guesswork. "Make it good" leaves everything open. "Keep it under 150 words, cut the jargon, and end with a clear next step" leaves nothing open.
+    </div>
+
+    <h2>Build a small library of prompts that already work</h2>
+    <p>Once you find a phrasing that reliably gets a good result for something you do often — summarizing meeting notes, drafting outreach messages, reviewing code — save it. Reuse and tweak it instead of starting from scratch every time. This is exactly how the lessons and prompt examples throughout our other AI articles were built: not one perfect prompt, but a small set of reliable ones, reused deliberately.</p>
+
+    <div class="callout">
+      <div class="label">bottom line</div>
+      State the role, the context, and the format you want, show an example if the style matters, ask for step-by-step reasoning on anything complex, and treat the first answer as round one, not the final draft. That combination gets you dramatically better results than the same request typed vaguely.
+    </div>
+  </article>
+</main>
+
+<div class="ad-slot"><div class="box">AD SLOT — 300×250 or responsive (in-article)</div></div>
+
+<footer>
+  <span>© 2026 devnotes — made with coffee and console.log()</span>
+  <span><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-of-service.html">Terms</a> · <a href="https://ko-fi.com/jw0405" target="_blank" rel="noopener">☕ Support us</a> · <a href="index.html">back to home</a></span>
+</footer>
+
+<div id="dn-cookie-banner" role="dialog" aria-label="Cookie consent" style="display:none;position:fixed;left:16px;right:16px;bottom:16px;max-width:560px;margin:0 auto;background:#151b23;color:#f4f2ec;border-radius:8px;padding:16px 18px;font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:9999;">
+  <p style="margin:0 0 10px;">This site uses cookies to understand usage and show relevant ads. <a href="privacy-policy.html" style="color:#3fa980;">Learn more</a></p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+    <button onclick="dnCookieChoice('accept')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:none;cursor:pointer;background:#3fa980;color:#151b23;">Accept all</button>
+    <button onclick="dnCookieChoice('reject')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:1px solid #555;cursor:pointer;background:transparent;color:#f4f2ec;">Reject non-essential</button>
+  </div>
+</div>
+<script>
+  function dnCookieChoice(choice){
+    try{ localStorage.setItem('devnotes-cookie-consent', choice); }catch(e){}
+    var b = document.getElementById('dn-cookie-banner');
+    if(b) b.style.display = 'none';
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    try{
+      if(!localStorage.getItem('devnotes-cookie-consent')){
+        var b = document.getElementById('dn-cookie-banner');
+        if(b) b.style.display = 'block';
+      }
+    }catch(e){}
+  });
+</script>
+
+</body>
+</html>
