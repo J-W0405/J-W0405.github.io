@@ -103,33 +103,33 @@
     <div class="trust-item"><span class="ic">📧</span><strong>Real support</strong><a href="mailto:devnotes.help@gmail.com" style="color:var(--mint);">devnotes.help@gmail.com</a></div>
   </div>
 
-  <div class="lesson-list">
-    <div class="lesson">
+  <div class="lesson-list" id="lesson-list">
+    <div class="lesson" data-url="lesson-js-01.html">
       <div class="num">🔒</div>
       <div><h3>Variables, Data Types &amp; Your First Script</h3><p>What JavaScript actually does, and how to store and label data.</p></div>
       <div class="status">premium</div>
     </div>
-    <div class="lesson">
+    <div class="lesson" data-url="lesson-js-02.html">
       <div class="num">🔒</div>
       <div><h3>Functions and Control Flow</h3><p>if/else, loops, and writing logic that makes decisions.</p></div>
       <div class="status">premium</div>
     </div>
-    <div class="lesson">
+    <div class="lesson" data-url="lesson-js-03.html">
       <div class="num">🔒</div>
       <div><h3>Arrays and Objects</h3><p>Storing and working with real collections of data.</p></div>
       <div class="status">premium</div>
     </div>
-    <div class="lesson">
+    <div class="lesson" data-url="lesson-js-04.html">
       <div class="num">🔒</div>
       <div><h3>The DOM: Making Pages Interactive</h3><p>Selecting elements and changing the page after it loads.</p></div>
       <div class="status">premium</div>
     </div>
-    <div class="lesson">
+    <div class="lesson" data-url="lesson-js-05.html">
       <div class="num">🔒</div>
       <div><h3>Events and Forms</h3><p>Responding to clicks, typing, and user input.</p></div>
       <div class="status">premium</div>
     </div>
-    <div class="lesson">
+    <div class="lesson" data-url="lesson-js-06.html">
       <div class="num">🔒</div>
       <div><h3>Project: Build an Interactive To-Do List</h3><p>Put it all together in one real, working app.</p></div>
       <div class="status">premium</div>
@@ -181,6 +181,20 @@
         btn.href = 'members-hub.html';
         btn.removeAttribute('target');
         btn.removeAttribute('rel');
+
+        document.querySelectorAll('#lesson-list .lesson[data-url]').forEach(function(row){
+          var url = row.getAttribute('data-url');
+          row.style.cursor = 'pointer';
+          row.addEventListener('click', function(){ window.location.href = url; });
+          var num = row.querySelector('.num');
+          if(num) num.textContent = '→';
+          var status = row.querySelector('.status');
+          if(status){
+            status.textContent = 'open';
+            status.style.background = '#eaf5ef';
+            status.style.color = '#3fa980';
+          }
+        });
       }
     }catch(e){}
   });

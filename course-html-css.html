@@ -172,33 +172,33 @@
     <div class="trust-item"><span class="ic">📧</span><strong>Real human support</strong><a href="mailto:devnotes.help@gmail.com" style="color:var(--mint);">devnotes.help@gmail.com</a></div>
   </div>
 
-  <div class="lesson-list">
+  <div class="lesson-list" id="lesson-list">
     <a class="lesson active" href="lesson-html-css-01.html">
       <div class="num" id="lesson-01-num">1</div>
       <div><h3>What Is HTML? Build Your First Web Page</h3><p>Structure, tags, and your very first "Hello World" page.</p></div>
       <div class="status" id="lesson-01-status">free</div>
     </a>
-    <div class="lesson locked">
+    <div class="lesson locked" data-url="lesson-html-css-02.html">
       <div class="num">🔒</div>
       <div><h3>Styling With CSS: Colors, Fonts &amp; Spacing</h3><p>Turn a plain page into something that actually looks designed.</p></div>
       <div class="status">premium</div>
     </div>
-    <div class="lesson locked">
+    <div class="lesson locked" data-url="lesson-html-css-03.html">
       <div class="num">🔒</div>
       <div><h3>The Box Model, Finally Explained</h3><p>Margin, border, padding — the concept that confuses every beginner.</p></div>
       <div class="status">premium</div>
     </div>
-    <div class="lesson locked">
+    <div class="lesson locked" data-url="lesson-html-css-04.html">
       <div class="num">🔒</div>
       <div><h3>Flexbox: Layouts That Don't Break</h3><p>Align and distribute elements without guesswork.</p></div>
       <div class="status">premium</div>
     </div>
-    <div class="lesson locked">
+    <div class="lesson locked" data-url="lesson-html-css-05.html">
       <div class="num">🔒</div>
       <div><h3>CSS Grid for Real Page Layouts</h3><p>When Flexbox isn't enough — building full-page structure.</p></div>
       <div class="status">premium</div>
     </div>
-    <div class="lesson locked">
+    <div class="lesson locked" data-url="lesson-html-css-06.html">
       <div class="num">🔒</div>
       <div><h3>Project: Build a Complete Landing Page</h3><p>Put it all together in one real, finished page.</p></div>
       <div class="status">premium</div>
@@ -265,6 +265,20 @@
         btn.href = 'members-hub.html';
         btn.removeAttribute('target');
         btn.removeAttribute('rel');
+
+        document.querySelectorAll('#lesson-list .lesson[data-url]').forEach(function(row){
+          var url = row.getAttribute('data-url');
+          row.style.cursor = 'pointer';
+          row.addEventListener('click', function(){ window.location.href = url; });
+          var num = row.querySelector('.num');
+          if(num) num.textContent = '→';
+          var status = row.querySelector('.status');
+          if(status){
+            status.textContent = 'open';
+            status.style.background = '#eaf5ef';
+            status.style.color = '#3fa980';
+          }
+        });
       }
     }catch(e){}
   });
