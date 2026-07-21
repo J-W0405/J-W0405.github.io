@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>
+  // If already verified in this browser, skip straight to the members hub
+  (function(){
+    try{
+      if(localStorage.getItem('devnotes-license-verified') === 'true'){
+        window.location.replace('members-hub.html');
+      }
+    }catch(e){}
+  })();
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7954849947139093" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Unlock your devnotes membership content with your Gumroad license key.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>Unlock Membership Content — devnotes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#151b23;--paper:#f4f2ec;--panel:#ffffff;--line:#d8d3c5;--amber:#e0932e;--mint:#3fa980;--muted:#6b6558;--red:#c0392b;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;line-height:1.6;}
+  a{color:var(--mint);}
+  header{border-bottom:2px solid var(--ink);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;background:var(--paper);}
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:18px;letter-spacing:-0.5px;text-decoration:none;color:var(--ink);}
+  .logo span{color:var(--amber);}
+  .back{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);text-decoration:none;}
+
+  main{max-width:480px;margin:60px auto;padding:0 24px;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--mint);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;}
+  .eyebrow::before{content:"// ";color:var(--muted);}
+  h1{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:26px;line-height:1.2;letter-spacing:-0.5px;margin-bottom:12px;}
+  p.lede{font-size:15px;color:#3a352b;margin-bottom:28px;}
+
+  .field label{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);display:block;margin-bottom:8px;}
+  .field input{
+    width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:5px;
+    font-family:'JetBrains Mono',monospace;font-size:14px;background:var(--panel);color:var(--ink);
+  }
+  .field input:focus{outline:2px solid var(--mint);border-color:var(--mint);}
+
+  .submit-btn{
+    width:100%;margin-top:16px;padding:13px;border:none;border-radius:5px;
+    background:var(--ink);color:var(--paper);font-family:'JetBrains Mono',monospace;
+    font-size:14px;font-weight:700;cursor:pointer;
+  }
+  .submit-btn:hover{background:var(--amber);color:var(--ink);}
+  .submit-btn:disabled{opacity:0.6;cursor:default;}
+
+  .msg{margin-top:16px;font-size:13.5px;padding:12px 14px;border-radius:5px;display:none;}
+  .msg.error{background:#fbeceb;color:var(--red);border:1px solid #e8b4b0;display:block;}
+  .msg.success{background:#eaf5ef;color:var(--mint);border:1px solid #b8e0cb;display:block;}
+
+  .help{margin-top:30px;padding-top:20px;border-top:1px dashed var(--line);font-size:13.5px;color:var(--muted);}
+  .help a{color:var(--mint);}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">dev<span>notes</span>._</a>
+  <a class="back" href="index.html">&larr; back to home</a>
+</header>
+
+<main>
+  <div class="eyebrow">members only</div>
+  <h1>Unlock your membership content</h1>
+  <p class="lede">Enter the license key from your Gumroad purchase receipt to access every lesson included in your devnotes membership.</p>
+
+  <div class="field">
+    <label for="license-key">License key</label>
+    <input type="text" id="license-key" placeholder="XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX" autocomplete="off">
+  </div>
+  <button class="submit-btn" id="unlock-btn" onclick="verifyLicense()">Unlock content</button>
+
+  <div class="msg" id="msg"></div>
+
+  <div class="help">
+    <strong>🔒 Your license key is only checked against Gumroad's official system — we don't store it on any server of ours, only in your own browser.</strong>
+  </div>
+
+  <div class="help">
+    <strong>Where do I find my license key?</strong><br>
+    Check the receipt email Gumroad sent you after subscribing, or log into
+    <a href="https://gumroad.com/library" target="_blank" rel="noopener">gumroad.com/library</a>
+    and open your devnotes membership — the license key is listed there.
+  </div>
+</main>
+
+<script>
+  const GUMROAD_PRODUCT_ID = "B-FRZh2tyt13qC1VM_06SQ==";
+
+  async function verifyLicense(){
+    const input = document.getElementById('license-key');
+    const btn = document.getElementById('unlock-btn');
+    const msg = document.getElementById('msg');
+    const key = input.value.trim();
+
+    msg.className = 'msg';
+    msg.textContent = '';
+
+    if(!key){
+      msg.className = 'msg error';
+      msg.textContent = 'Please enter your license key.';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Checking...';
+
+    try{
+      const body = new URLSearchParams();
+      body.append('product_id', GUMROAD_PRODUCT_ID);
+      body.append('license_key', key);
+      body.append('increment_uses_count', 'false');
+
+      const res = await fetch('https://api.gumroad.com/v2/licenses/verify', {
+        method: 'POST',
+        body: body
+      });
+      const data = await res.json();
+
+      if(data.success){
+        try{
+          localStorage.setItem('devnotes-license-key', key);
+          localStorage.setItem('devnotes-license-verified', 'true');
+        }catch(e){}
+        msg.className = 'msg success';
+        msg.textContent = 'License verified! Redirecting to your lessons...';
+        setTimeout(function(){ window.location.href = 'members-hub.html'; }, 900);
+      } else {
+        msg.className = 'msg error';
+        msg.textContent = 'That license key was not recognized. Double-check it against your Gumroad receipt, or make sure your membership is still active.';
+        btn.disabled = false;
+        btn.textContent = 'Unlock content';
+      }
+    }catch(err){
+      msg.className = 'msg error';
+      msg.textContent = 'Something went wrong checking your key. Please try again in a moment.';
+      btn.disabled = false;
+      btn.textContent = 'Unlock content';
+    }
+  }
+
+  document.getElementById('license-key').addEventListener('keydown', function(e){
+    if(e.key === 'Enter') verifyLicense();
+  });
+</script>
+
+
+<div id="dn-cookie-banner" role="dialog" aria-label="Cookie consent" style="display:none;position:fixed;left:16px;right:16px;bottom:16px;max-width:560px;margin:0 auto;background:#151b23;color:#f4f2ec;border-radius:8px;padding:16px 18px;font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:9999;">
+  <p style="margin:0 0 10px;">This site uses cookies to understand usage and show relevant ads. <a href="privacy-policy.html" style="color:#3fa980;">Learn more</a></p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+    <button onclick="dnCookieChoice('accept')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:none;cursor:pointer;background:#3fa980;color:#151b23;">Accept all</button>
+    <button onclick="dnCookieChoice('reject')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:1px solid #555;cursor:pointer;background:transparent;color:#f4f2ec;">Reject non-essential</button>
+  </div>
+</div>
+<script>
+  function dnCookieChoice(choice){
+    try{ localStorage.setItem('devnotes-cookie-consent', choice); }catch(e){}
+    var b = document.getElementById('dn-cookie-banner');
+    if(b) b.style.display = 'none';
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    try{
+      if(!localStorage.getItem('devnotes-cookie-consent')){
+        var b = document.getElementById('dn-cookie-banner');
+        if(b) b.style.display = 'block';
+      }
+    }catch(e){}
+  });
+</script>
+
+</body>
+</html>
