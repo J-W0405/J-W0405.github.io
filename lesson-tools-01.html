@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>
+  (function(){
+    try{
+      if(localStorage.getItem('devnotes-license-verified') !== 'true'){
+        window.location.replace('unlock.html');
+      }
+    }catch(e){
+      window.location.replace('unlock.html');
+    }
+  })();
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7954849947139093" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Lesson 1: Terminal basics — navigate your computer without a mouse. Premium lesson for devnotes members.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>Lesson 1: Terminal Basics — devnotes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  function dnGetProgress(){ try{ return JSON.parse(localStorage.getItem('devnotes-progress') || '{}'); }catch(e){ return {}; } }
+  function dnSaveProgress(p){ try{ localStorage.setItem('devnotes-progress', JSON.stringify(p)); }catch(e){} }
+  function dnIsComplete(course, lessonId){ const p = dnGetProgress(); return !!(p[course] && p[course][lessonId]); }
+  function dnToggleComplete(course, lessonId){ const p = dnGetProgress(); if(!p[course]) p[course] = {}; p[course][lessonId] = !p[course][lessonId]; dnSaveProgress(p); return p[course][lessonId]; }
+</script>
+<style>
+  :root{--ink:#151b23;--paper:#f4f2ec;--panel:#ffffff;--line:#d8d3c5;--amber:#e0932e;--mint:#3fa980;--muted:#6b6558;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;line-height:1.6;}
+  a{color:inherit;}
+  header{border-bottom:2px solid var(--ink);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;background:var(--paper);position:sticky;top:0;z-index:10;}
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:18px;letter-spacing:-0.5px;text-decoration:none;}
+  .logo span{color:var(--amber);}
+  .back{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);text-decoration:none;}
+  .member-bar{background:var(--ink);color:#c9d1d9;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;}
+  .member-bar span{color:var(--mint);}
+  .complete-bar{max-width:720px;margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
+  .complete-btn{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;padding:10px 18px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;border-radius:4px;}
+  .complete-btn.done{background:var(--mint);border-color:var(--mint);color:var(--ink);}
+  main{max-width:720px;margin:0 auto;padding:16px 24px 30px;}
+  .crumbs{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:18px;}
+  .crumbs a{color:var(--mint);}
+  .filetag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mint);background:#eaf5ef;display:inline-block;padding:2px 8px;border-radius:3px;margin-bottom:16px;}
+  h1{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:30px;line-height:1.2;letter-spacing:-0.5px;margin-bottom:14px;}
+  .meta{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:30px;border-bottom:1px dashed var(--line);padding-bottom:20px;}
+  .lede{font-size:17px;color:#3a352b;margin-bottom:28px;}
+  article h2{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;margin:36px 0 14px;padding-top:6px;border-top:1.5px solid var(--ink);}
+  article p{font-size:16px;margin-bottom:16px;color:#292520;}
+  article ul,article ol{margin:0 0 18px 22px;font-size:16px;color:#292520;}
+  article li{margin-bottom:8px;}
+  strong{color:var(--ink);}
+  code{font-family:'JetBrains Mono',monospace;background:#eae6d8;padding:2px 6px;border-radius:3px;font-size:14px;}
+  .code-block{background:var(--ink);color:#c9d1d9;font-family:'JetBrains Mono',monospace;font-size:13.5px;padding:18px 20px;border-radius:6px;margin:18px 0;white-space:pre;overflow-x:auto;line-height:1.6;}
+  .code-block .cmt{color:#6b7280;}
+  .code-block .prompt{color:var(--mint);}
+  table{width:100%;border-collapse:collapse;margin:20px 0 26px;font-size:14.5px;}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;}
+  th{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--panel);}
+  td{background:#fbfaf6;}
+  td code{background:transparent;padding:0;}
+  .callout{background:var(--panel);border:1.5px solid var(--line);border-left:4px solid var(--amber);padding:16px 18px;margin:22px 0;font-size:14.5px;}
+  .callout .label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+  .callout.exercise{border-left-color:var(--mint);}
+  .callout.exercise .label{color:var(--mint);}
+  .quiz{background:var(--ink);border-radius:8px;padding:22px 24px;margin:30px 0;color:var(--paper);}
+  .quiz .label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mint);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;}
+  .quiz-q{margin-bottom:18px;}
+  .quiz-q p{color:var(--paper);font-size:14.5px;margin-bottom:10px;font-weight:600;}
+  .quiz-opt{display:block;font-size:13.5px;padding:9px 12px;border:1.5px solid #333c47;border-radius:5px;margin-bottom:6px;cursor:pointer;color:#c9d1d9;}
+  .quiz-opt:hover{border-color:var(--mint);}
+  .quiz-opt input{margin-right:8px;}
+  .quiz-btn{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;padding:10px 20px;background:var(--mint);color:var(--ink);border:none;border-radius:5px;cursor:pointer;margin-top:6px;}
+  .quiz-result{margin-top:14px;font-size:13.5px;padding:12px 14px;border-radius:5px;display:none;}
+  .quiz-result.show{display:block;}
+  .quiz-opt.correct{border-color:var(--mint);background:rgba(63,169,128,0.15);}
+  .quiz-opt.incorrect{border-color:#c0392b;background:rgba(192,57,43,0.15);}
+  .ad-slot{max-width:720px;margin:36px auto;padding:0 24px;}
+  .ad-slot .box{border:1.5px dashed var(--line);background:#ece8dc;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;text-align:center;padding:18px;}
+  .next-nav{max-width:720px;margin:40px auto 0;padding:20px 24px;border:1.5px solid var(--line);background:var(--panel);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+  .next-nav span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);}
+  .next-nav strong{display:block;font-size:15px;margin-top:2px;}
+  footer{margin-top:50px;border-top:2px solid var(--ink);padding:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+</style>
+</head>
+<body>
+
+<div class="member-bar">🔒 <span>Members-only lesson</span> — thanks for supporting devnotes</div>
+<header>
+  <a class="logo" href="index.html">dev<span>notes</span>._</a>
+  <a class="back" href="course-developer-tools.html">&larr; back to course</a>
+</header>
+<div class="complete-bar">
+  <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);">progress is saved in this browser — no account needed</span>
+  <button class="complete-btn" id="complete-btn" onclick="markComplete()">Mark lesson as complete</button>
+</div>
+
+<main>
+  <div class="crumbs"><a href="index.html">devnotes</a> / <a href="course-developer-tools.html">Developer Tools</a> / Lesson 1</div>
+  <span class="filetag">lesson 1 of 6 · premium</span>
+  <h1>Terminal Basics: Navigating Without a Mouse</h1>
+  <div class="meta">18 min · Developer Tools</div>
+
+  <p class="lede">Every developer eventually stops clicking through folders and starts typing instead. The terminal looks intimidating for about a day — then it becomes the fastest way to do almost everything. This lesson gets you comfortable with the handful of commands you'll actually use daily.</p>
+
+  <article>
+    <h2>What the terminal actually is</h2>
+    <p>The terminal (also called the command line, shell, or console) is a text-based way to talk directly to your computer — instead of clicking icons, you type commands. On Mac and Linux it's usually called <strong>Terminal</strong>; on Windows it's <strong>PowerShell</strong> or <strong>Command Prompt</strong> (most developers on Windows now use <strong>Git Bash</strong> or <strong>WSL</strong> for a more standard experience, since it matches Mac/Linux commands).</p>
+
+    <h2>The prompt: reading what it's telling you</h2>
+    <div class="code-block"><span class="prompt">yourname@computer ~/Desktop $</span> </div>
+    <p>Everything before the <code>$</code> is just context (your username, computer name, and current folder). The <code>$</code> is where you type. Every command in this lesson goes right after it.</p>
+
+    <h2>Moving around: the commands you'll use constantly</h2>
+    <table>
+      <tr><th>Command</th><th>Does</th></tr>
+      <tr><td><code>pwd</code></td><td>"Print working directory" — shows exactly where you are right now</td></tr>
+      <tr><td><code>ls</code></td><td>Lists everything in the current folder</td></tr>
+      <tr><td><code>cd foldername</code></td><td>"Change directory" — moves into a folder</td></tr>
+      <tr><td><code>cd ..</code></td><td>Moves up one folder (to the parent)</td></tr>
+      <tr><td><code>cd ~</code></td><td>Jumps straight back to your home folder from anywhere</td></tr>
+    </table>
+    <div class="code-block"><span class="prompt">$</span> pwd
+/Users/alex/Desktop
+<span class="prompt">$</span> ls
+project-1  project-2  notes.txt
+<span class="prompt">$</span> cd project-1
+<span class="prompt">$</span> pwd
+/Users/alex/Desktop/project-1</div>
+
+    <div class="callout">
+      <div class="label">quick tip</div>
+      Press the <strong>Tab</strong> key while typing a folder or file name — the terminal auto-completes it for you. This alone saves enormous amounts of typing and typos once it becomes habit.
+    </div>
+
+    <h2>Working with files and folders</h2>
+    <table>
+      <tr><th>Command</th><th>Does</th></tr>
+      <tr><td><code>mkdir name</code></td><td>Creates a new folder</td></tr>
+      <tr><td><code>touch file.txt</code></td><td>Creates a new empty file</td></tr>
+      <tr><td><code>rm file.txt</code></td><td>Deletes a file — no recycle bin, be careful</td></tr>
+      <tr><td><code>rm -r foldername</code></td><td>Deletes a folder and everything inside it</td></tr>
+      <tr><td><code>cp source.txt copy.txt</code></td><td>Copies a file</td></tr>
+      <tr><td><code>mv old.txt new.txt</code></td><td>Renames or moves a file</td></tr>
+    </table>
+
+    <div class="callout">
+      <div class="label">important</div>
+      <code>rm</code> does not ask "are you sure?" and does not send files to a trash bin — they're gone immediately. Double-check the file name before pressing Enter, especially with <code>rm -r</code>.
+    </div>
+
+    <div class="ad-slot" style="margin:30px auto;"><div class="box">AD SLOT — 728×90 or responsive (mid-lesson)</div></div>
+
+    <h2>Opening the current folder in VS Code</h2>
+    <div class="code-block"><span class="prompt">$</span> code .</div>
+    <p>This single command opens your code editor directly in whatever folder you're currently in — no navigating through "File → Open" menus. It's one of the most-used commands once it becomes habit.</p>
+
+    <h2>Clearing the clutter</h2>
+    <div class="code-block"><span class="prompt">$</span> clear</div>
+    <p>Wipes the visible history in your terminal window so you're not scrolling past old commands. Nothing is actually deleted — it's purely visual.</p>
+
+    <h2>Try it yourself</h2>
+    <div class="callout exercise">
+      <div class="label">exercise</div>
+      Open your terminal. Use <code>pwd</code> to see where you are, <code>ls</code> to see what's there, and <code>cd</code> into any folder you can see. Then use <code>mkdir</code> to create a new folder called <code>devnotes-practice</code>, and <code>cd</code> into it.
+    </div>
+
+    <h2>Level up: build a small project structure</h2>
+    <div class="callout exercise">
+      <div class="label">exercise 2</div>
+      Inside your <code>devnotes-practice</code> folder, use <code>touch</code> to create <code>index.html</code>, <code>style.css</code>, and <code>script.js</code>. Run <code>ls</code> to confirm all three exist, then run <code>code .</code> to open the whole folder in VS Code.
+    </div>
+
+    <div class="quiz">
+      <div class="label">✓ quick check — 3 questions</div>
+      <div class="quiz-q" data-answer="b">
+        <p>1. What does <code>cd ..</code> do?</p>
+        <label class="quiz-opt"><input type="radio" name="q1" value="a"> Deletes the current folder</label>
+        <label class="quiz-opt"><input type="radio" name="q1" value="b"> Moves up one folder to the parent</label>
+        <label class="quiz-opt"><input type="radio" name="q1" value="c"> Creates a new folder</label>
+      </div>
+      <div class="quiz-q" data-answer="c">
+        <p>2. Which command permanently deletes a file with no recycle bin?</p>
+        <label class="quiz-opt"><input type="radio" name="q2" value="a"> cd</label>
+        <label class="quiz-opt"><input type="radio" name="q2" value="b"> ls</label>
+        <label class="quiz-opt"><input type="radio" name="q2" value="c"> rm</label>
+      </div>
+      <div class="quiz-q" data-answer="a">
+        <p>3. What does pressing Tab while typing a file name do?</p>
+        <label class="quiz-opt"><input type="radio" name="q3" value="a"> Auto-completes the name</label>
+        <label class="quiz-opt"><input type="radio" name="q3" value="b"> Deletes what you typed</label>
+        <label class="quiz-opt"><input type="radio" name="q3" value="c"> Opens a new terminal window</label>
+      </div>
+      <button class="quiz-btn" onclick="checkQuiz()">Check my answers</button>
+      <div class="quiz-result" id="quiz-result"></div>
+    </div>
+
+    <div class="callout">
+      <div class="label">what's next</div>
+      Lesson 2 covers Git — how to save versions of your code as you work, so you can always undo a mistake and never lose progress again.
+    </div>
+
+    <div class="callout">
+      <div class="label">bottom line</div>
+      <code>pwd</code>, <code>ls</code>, and <code>cd</code> cover 90% of daily terminal navigation. Add <code>mkdir</code>, <code>touch</code>, and <code>code .</code>, and you can build an entire project structure without touching a mouse.
+    </div>
+  </article>
+</main>
+
+<div class="ad-slot"><div class="box">AD SLOT — 300×250 or responsive (in-lesson)</div></div>
+
+<div class="next-nav">
+  <div><span>next up</span><strong>Lesson 2: Git Basics — coming soon</strong></div>
+  <a href="course-developer-tools.html" class="back">view all lessons →</a>
+</div>
+
+<footer>
+  <span>© 2026 devnotes — made with coffee and console.log()</span>
+  <span><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-of-service.html">Terms</a> · <a href="https://ko-fi.com/jw0405" target="_blank" rel="noopener">☕ Support us</a> · <a href="index.html">back to home</a></span>
+</footer>
+
+<div id="dn-cookie-banner" role="dialog" aria-label="Cookie consent" style="display:none;position:fixed;left:16px;right:16px;bottom:16px;max-width:560px;margin:0 auto;background:#151b23;color:#f4f2ec;border-radius:8px;padding:16px 18px;font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:9999;">
+  <p style="margin:0 0 10px;">This site uses cookies to understand usage and show relevant ads. <a href="privacy-policy.html" style="color:#3fa980;">Learn more</a></p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+    <button onclick="dnCookieChoice('accept')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:none;cursor:pointer;background:#3fa980;color:#151b23;">Accept all</button>
+    <button onclick="dnCookieChoice('reject')" style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:8px 14px;border-radius:5px;border:1px solid #555;cursor:pointer;background:transparent;color:#f4f2ec;">Reject non-essential</button>
+  </div>
+</div>
+<script>
+  function dnCookieChoice(choice){
+    try{ localStorage.setItem('devnotes-cookie-consent', choice); }catch(e){}
+    var b = document.getElementById('dn-cookie-banner');
+    if(b) b.style.display = 'none';
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    try{
+      if(!localStorage.getItem('devnotes-cookie-consent')){
+        var b = document.getElementById('dn-cookie-banner');
+        if(b) b.style.display = 'block';
+      }
+    }catch(e){}
+  });
+</script>
+
+<script>
+  function refreshCompleteButton(){
+    const btn = document.getElementById('complete-btn');
+    const done = dnIsComplete('tools', '01');
+    btn.textContent = done ? '✓ Lesson completed' : 'Mark lesson as complete';
+    btn.classList.toggle('done', done);
+  }
+  function markComplete(){
+    dnToggleComplete('tools', '01');
+    refreshCompleteButton();
+  }
+  document.addEventListener('DOMContentLoaded', refreshCompleteButton);
+
+  function checkQuiz(){
+    const questions = document.querySelectorAll('.quiz-q');
+    let correct = 0;
+    questions.forEach(function(q){
+      const answer = q.getAttribute('data-answer');
+      const selected = q.querySelector('input[type="radio"]:checked');
+      const opts = q.querySelectorAll('.quiz-opt');
+      opts.forEach(function(opt){ opt.classList.remove('correct','incorrect'); });
+      if(selected){
+        const selectedOpt = selected.closest('.quiz-opt');
+        if(selected.value === answer){
+          selectedOpt.classList.add('correct');
+          correct++;
+        } else {
+          selectedOpt.classList.add('incorrect');
+          q.querySelector('input[value="'+answer+'"]').closest('.quiz-opt').classList.add('correct');
+        }
+      }
+    });
+    const result = document.getElementById('quiz-result');
+    result.className = 'quiz-result show';
+    result.style.background = correct === questions.length ? 'rgba(63,169,128,0.2)' : 'rgba(224,147,46,0.2)';
+    result.style.color = '#f4f2ec';
+    result.textContent = correct + ' / ' + questions.length + ' correct — ' + (correct === questions.length ? "Nice, you've got this!" : 'Review the highlighted answers above and try the exercises again.');
+  }
+</script>
+
+</body>
+</html>
