@@ -89,6 +89,21 @@
   .next-nav{max-width:720px;margin:40px auto 0;padding:20px 24px;border:1.5px solid var(--line);background:var(--panel);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
   .next-nav span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);}
   .next-nav strong{display:block;font-size:15px;margin-top:2px;}
+  .continue-btn{
+    font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;
+    background:var(--mint);color:var(--ink);padding:12px 22px;border-radius:6px;
+    text-decoration:none;display:inline-block;transition:transform .12s ease, background .12s ease;
+    box-shadow:0 2px 0 #2a7d5f;
+  }
+  .continue-btn:hover{background:var(--amber);box-shadow:0 2px 0 #a86a1f;transform:translateY(-1px);}
+  .continue-btn:active{transform:translateY(1px);box-shadow:none;}
+  .next-btn{
+    font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;
+    background:var(--mint);color:var(--ink);padding:12px 24px;border-radius:6px;
+    text-decoration:none;white-space:nowrap;box-shadow:0 2px 0 #2d7d5f;
+  }
+  .next-btn:hover{background:var(--amber);box-shadow:0 2px 0 #a8681f;}
+
   footer{margin-top:50px;border-top:2px solid var(--ink);padding:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
 </style>
 </head>
@@ -233,8 +248,8 @@ node_modules/
 <div class="ad-slot"><div class="box">AD SLOT — 300×250 or responsive (in-lesson)</div></div>
 
 <div class="next-nav">
-  <div><span>next up</span><strong>Lesson 3: GitHub — coming soon</strong></div>
-  <a href="course-developer-tools.html" class="back">view all lessons →</a>
+  <div><span>next up</span><strong>Lesson 3: GitHub</strong></div>
+  <a href="lesson-tools-03.html" class="continue-btn">Continue →</a>
 </div>
 
 <footer>
