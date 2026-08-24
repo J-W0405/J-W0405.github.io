@@ -164,6 +164,17 @@
   body.lang-es header, body.lang-es .header-right, body.lang-es .lang-switch{display:flex;}
   body.lang-es .section-head{display:flex;}
 
+
+  .content-tabs{max-width:1100px;margin:56px auto 0;padding:0 24px;display:flex;gap:8px;}
+  .content-tab{
+    font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+    padding:10px 20px;border:1.5px solid var(--ink);border-radius:20px 20px 0 0;
+    background:transparent;color:var(--muted);cursor:pointer;border-bottom:none;
+    position:relative;top:1px;
+  }
+  .content-tab.active{background:var(--ink);color:var(--paper);}
+  .tab-panel .section-head{margin-top:0;border-top:none;}
+
   .trust-strip{
     max-width:1100px;margin:20px auto 0;padding:0 24px;
     display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
@@ -183,8 +194,8 @@
   <div class="logo">dev<span>notes</span>._</div>
   <div class="header-right">
     <nav><ul>
-      <li><a href="#courses">Courses</a></li>
-      <li><a href="#articles">Articles</a></li>
+      <li><a href="#panel-courses" onclick="showTab('courses')">Courses</a></li>
+      <li><a href="#panel-articles" onclick="showTab('articles')">Articles</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="my-learning.html" id="nav-progress">My Learning</a></li>
       <li><a href="unlock.html">Member Login</a></li>
@@ -273,9 +284,17 @@
   <div class="ad-slot" style="margin:30px 0 0;padding:0;"><div class="box">AD SLOT — 300×250 (in-feed)</div></div>
 </section>
 
+
+<div class="content-tabs">
+  <button class="content-tab active" id="tab-btn-courses" onclick="showTab('courses')" data-en>courses/</button>
+  <button class="content-tab active" id="tab-btn-courses-es" onclick="showTab('courses')" data-es>cursos/</button>
+  <button class="content-tab" id="tab-btn-articles" onclick="showTab('articles')" data-en>articles/</button>
+  <button class="content-tab" id="tab-btn-articles-es" onclick="showTab('articles')" data-es>artículos/</button>
+</div>
+
+<div id="panel-courses" class="tab-panel">
 <div class="section-head" id="courses">
-  <h2 data-en>courses/</h2>
-  <h2 data-es>cursos/</h2>
+  <span></span>
   <span class="count" data-en>1 free · rest from $15/mo</span>
   <span class="count" data-es>1 gratis · resto desde $15/mes</span>
 </div>
@@ -308,10 +327,12 @@
 </div>
 
 <div class="ad-slot" style="margin-top:30px;"><div class="box">AD SLOT — 728×90 (replace with your AdSense/Ezoic code)</div></div>
+</div>
 
+
+<div id="panel-articles" class="tab-panel" style="display:none;">
 <div class="section-head" id="articles">
-  <h2 data-en>ai_and_productivity/</h2>
-  <h2 data-es>ia_y_productividad/</h2>
+  <span></span>
   <span class="count" data-en>9 files</span>
   <span class="count" data-es>9 archivos</span>
 </div>
@@ -392,6 +413,8 @@
 </div>
 
 <div class="ad-slot" style="margin-top:30px;"><div class="box">AD SLOT — 728×90 (replace with your AdSense/Ezoic code)</div></div>
+</div>
+
 
 <div class="trust-strip">
   <div class="trust-item"><span class="ic">🔒</span><strong data-en>Secure checkout</strong><strong data-es>Pago seguro</strong><span data-en>Payment handled by Gumroad — we never see your card details</span><span data-es>Pago procesado por Gumroad — nunca vemos tu tarjeta</span></div>
@@ -423,6 +446,26 @@
     var saved = 'en';
     try{ saved = localStorage.getItem('devnotes-lang') || 'en'; }catch(e){}
     setLang(saved);
+  })();
+
+  function showTab(tab){
+    var courses = document.getElementById('panel-courses');
+    var articles = document.getElementById('panel-articles');
+    var showCourses = tab === 'courses';
+    courses.style.display = showCourses ? '' : 'none';
+    articles.style.display = showCourses ? 'none' : '';
+    ['tab-btn-courses','tab-btn-courses-es'].forEach(function(id){
+      document.getElementById(id).classList.toggle('active', showCourses);
+    });
+    ['tab-btn-articles','tab-btn-articles-es'].forEach(function(id){
+      document.getElementById(id).classList.toggle('active', !showCourses);
+    });
+    try{ localStorage.setItem('devnotes-tab', tab); }catch(e){}
+  }
+  (function(){
+    var savedTab = 'courses';
+    try{ savedTab = localStorage.getItem('devnotes-tab') || 'courses'; }catch(e){}
+    showTab(savedTab);
   })();
 
   const text = "cat next_lesson.md";
