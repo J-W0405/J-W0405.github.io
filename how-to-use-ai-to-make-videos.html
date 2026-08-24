@@ -41,6 +41,25 @@
   td{background:#fbfaf6;}
   .callout{background:var(--panel);border:1.5px solid var(--line);border-left:4px solid var(--amber);padding:16px 18px;margin:22px 0;font-size:14.5px;}
   .callout .label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+  .cross-promo{max-width:720px;margin:36px auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:600px){.cross-promo{grid-template-columns:1fr;}}
+  .promo-card{border:1.5px solid var(--line);background:var(--panel);border-radius:8px;padding:20px;text-decoration:none;display:block;transition:transform .12s ease;}
+  .promo-card:hover{transform:translateY(-2px);}
+  .promo-card .ic{font-size:22px;display:block;margin-bottom:8px;}
+  .promo-card strong{display:block;font-size:15px;color:var(--ink);margin-bottom:4px;}
+  .promo-card span{font-size:13px;color:var(--muted);}
+  .promo-card.course{border-left:4px solid var(--mint);}
+  .promo-card.donate{border-left:4px solid var(--amber);}
+  .cta-block{
+    background:var(--ink);border-radius:10px;padding:26px 28px;margin:34px 0 10px;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;
+  }
+  .cta-block p{color:#c9d1d9;font-size:14px;max-width:38ch;margin:0;}
+  .cta-block .label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;display:block;}
+  .cta-btns{display:flex;gap:10px;flex-wrap:wrap;}
+  .cta-btn{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;padding:11px 18px;border-radius:6px;text-decoration:none;white-space:nowrap;}
+  .cta-btn.primary{background:var(--mint);color:#0d1a14;}
+  .cta-btn.ghost{background:transparent;color:var(--paper);border:1.5px solid #3a4552;}
   .ad-slot{max-width:720px;margin:36px auto;padding:0 24px;}
   .ad-slot .box{border:1.5px dashed var(--line);background:#ece8dc;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;text-align:center;padding:18px;}
   footer{margin-top:60px;border-top:2px solid var(--ink);padding:24px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
@@ -98,10 +117,35 @@
       <div class="label">bottom line</div>
       You don't need professional editing skills to publish your first video: you need a clear script, one tool per block of the process, and the discipline to review before publishing. Quality comes from repetition, not the most expensive tool.
     </div>
+
+    <div class="cta-block">
+      <div>
+        <span class="label">keep going</span>
+        <p>Reading about it is step one. The devnotes courses are where you actually build it — hands-on, one short lesson at a time.</p>
+      </div>
+      <div class="cta-btns">
+        <a class="cta-btn primary" href="course-html-css.html">Start learning to build for free →</a>
+        <a class="cta-btn ghost" href="https://ko-fi.com/jw0405" target="_blank" rel="noopener">☕ Support devnotes</a>
+      </div>
+    </div>
   </article>
 </main>
 
 <div class="ad-slot"><div class="box">AD SLOT — 300×250 or responsive (in-article)</div></div>
+
+
+<div class="cross-promo">
+  <a class="promo-card course" href="index.html#courses">
+    <span class="ic">🎓</span>
+    <strong>Want to go deeper?</strong>
+    <span>Explore the full devnotes courses — HTML &amp; CSS, JavaScript, and Developer Tools.</span>
+  </a>
+  <a class="promo-card donate" href="https://ko-fi.com/jw0405" target="_blank" rel="noopener">
+    <span class="ic">☕</span>
+    <strong>Enjoying devnotes?</strong>
+    <span>If this helped, consider buying a coffee — it keeps the lessons free and ad-light.</span>
+  </a>
+</div>
 
 <footer>
   <span>© 2026 devnotes — made with coffee and console.log()</span>
